@@ -87,7 +87,13 @@ global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
    
     % probably need a better way to model the space vector
    grid_vec = linspace(min([pointsmatorig(locs5,1);pointsmatorig(locs5,2)]),max([pointsmatorig(locs5,1);pointsmatorig(locs5,2)]),size(drug_grid,1));
-     disp('here')
+
+   
+   % for dead cells, they slowly disintegrate and are replaced by empty
+   % place holder cells
+   
+   dead_cell_disintegration(pointsmat)
+   
    [pointsmat,drug_grid] =  drug_induced_cell_death(pointsmat,drug_grid,grid_vec);
    pointsmatorig = pointsmat;
     

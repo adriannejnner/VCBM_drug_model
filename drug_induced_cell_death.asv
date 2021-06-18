@@ -1,8 +1,5 @@
 function [pointsmat,drug_grid] =  drug_induced_cell_death(pointsmat,drug_grid,grid_vec)
 
-    deltat = 1;
-    celluptakerate = 0.1;
-
     grid_size = size(drug_grid,1);
     
     % find points in the drug grid that have a large enough concentration
@@ -28,19 +25,20 @@ function [pointsmat,drug_grid] =  drug_induced_cell_death(pointsmat,drug_grid,gr
 
             rand_prob = rand(1,length(cells_that_could_die));
             cells_to_die = find(prob_cell_dies<rand_prob);
-            
-            if isempty(cells_to_die) ==0 
-                for kk = 1:length(cells_to_die)
-                    if pointsmat(cells_that_could_die(cells_to_die),5) ~=3
 
-                        pointsmat(cells_that_could_die(cells_to_die),5) = 3; %cells become type dead
+            if isempty(cells_to_die) ==0
+                size(cells_to_die)
+                pointsmat(cells_that_could_die(cells_to_die),5) = 3;
                 
-                        % cells that died uptake (might make this all cells in future)
-                        drug_grid(ii,jj) = drug_grid(ii,jj)-drug_grid(ii,jj)*celluptakerate*deltat;
-                    end
-                end
+                % cells that died uptake (might make this all cells in future)
+                cells_that_could_die(cells_to_die)
+                
+                
             end
         end
         
+        
+        
+        % XXXX still need death model for once cell dies
     end
 end
