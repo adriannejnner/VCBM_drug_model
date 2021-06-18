@@ -32,7 +32,7 @@ mumage = params.mumage;
                    
                    %are the cells old enough to proliferate
                    %aged = find(pointsmat(imat(ll),6)>mumage)
-                  
+                                     
                    locs_not_too_crowded =  find(distmin<=1);
                    randmat = rand(1,length(imat));
                    probarray = randmat<p;

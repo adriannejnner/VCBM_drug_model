@@ -1,6 +1,4 @@
-function [Framp0_,drug_grid] = model_evolver_drug(pointsmat,params,drug_grid)
-
-global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
+function [Framp0_,drug_grid,freecellmat] = model_evolver_drug(pointsmat,params,drug_grid,freecellmat)
 
 %Colum 1 and 2 are position
 %Colum 3 represents slength
@@ -10,8 +8,7 @@ global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
         %2 represents infected cells
         %3 represents dead cells
         %4 represents healthy cells
-
- Framp0_{1} = pointsmat; 
+        %5 empty cells
  
  page = params.page;
  mumage = params.mumage;
@@ -24,6 +21,8 @@ global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
  Delta_t = params.Delta_t;
  eta = params.eta;
  dMAX = params.dMAX;
+ 
+ dage = 3; % number of hours it takes for cell to completely disintegrate
  
  
  prod_PSCcelldiff = params.prob_PSCcelldiff;%0.2;
@@ -88,11 +87,10 @@ global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
     % probably need a better way to model the space vector
    grid_vec = linspace(min([pointsmatorig(locs5,1);pointsmatorig(locs5,2)]),max([pointsmatorig(locs5,1);pointsmatorig(locs5,2)]),size(drug_grid,1));
 
-   
    % for dead cells, they slowly disintegrate and are replaced by empty
    % place holder cells
-   
-   dead_cell_disintegration(pointsmat)
+   dead_cells = find(pointsmat(:,5)==3);
+   [pointsmat] = dead_cell_disintegration(pointsmat,dead_cells,dage);
    
    [pointsmat,drug_grid] =  drug_induced_cell_death(pointsmat,drug_grid,grid_vec);
    pointsmatorig = pointsmat;
@@ -132,25 +130,37 @@ global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
           pointsmat(l_1_mu,6) = pointsmatorig(l_1_mu,6)+1;
      end
     
-    newpoint = [];     
-    %stellatecells
+    newpoint = [];   
+    
     locs51 = find(pointsmatorig(:,5)==51);
     [pointsmat(locs51,:), newpoint] = uninfectedcell_PSC_faster(pointsmatorig,locs51,boundarycells,TRI,params);
     pointsmat(locs51,6) = pointsmatorig(locs51,6)+1;
-    %if length(newpoint)>1
-        %disp('proliferated')
-        %newpoint
-       %if rand<prod_PSCcelldiff
-       %    newpoint(:,5) = 51;   
-       %else 
-        %   newpoint(:,5) = 1; 
-       %end
-    %end
+
     newpointsmat = [newpointsmat;newpoint];
             
     pointsmat = [pointsmat;newpointsmat];
             
-       Framp0_ = pointsmat; 
+    %creating matrix off "empty" cells that are just used for plotting to
+    %make sure no unrealistic cell sizes are introduced
+    pointstoremove = find(pointsmat(:,5)== 3 & pointsmat(:,6)==dage);
+    size(pointstoremove)
+    freecellmat = [freecellmat;[pointsmat(pointstoremove,1:4),repmat(5,length(pointstoremove),1),NaN(length(pointstoremove),1)]];
+    pointsmat(pointstoremove,:) = [];
+    
+    
+    cellisgone = [];
+    for ff = 1:length(freecellmat)
+        ddd = disttoneighbours_v02_freecellmat([pointsmat;freecellmat],ff+length(pointsmat));
+        if min(ddd)<=s-7*eps
+            cellisgone = [cellisgone;fcc];
+        end
+    end
+    freecellmat(cellisgone,:) = [];
+    
+    Framp0_ = pointsmat; 
+    freecellmat_ = freecellmat;   
+       
+       
 %toc
 
 

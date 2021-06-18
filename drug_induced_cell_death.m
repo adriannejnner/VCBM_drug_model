@@ -34,6 +34,9 @@ function [pointsmat,drug_grid] =  drug_induced_cell_death(pointsmat,drug_grid,gr
                     if pointsmat(cells_that_could_die(cells_to_die),5) ~=3
 
                         pointsmat(cells_that_could_die(cells_to_die),5) = 3; %cells become type dead
+                        pointsmat(cells_that_could_die(cells_to_die),6) = 1; %age becomes 1, tracks how many hours it has spent disintegrating
+                        pointsmat(cells_that_could_die(cells_to_die),3) = pointsmat(cells_that_could_die(cells_to_die),3)/8; % cell starts process of disintegration by shorting spring length
+                        pointsmat(cells_that_could_die(cells_to_die),4) = NaN; % cell loses sibling                
                 
                         % cells that died uptake (might make this all cells in future)
                         drug_grid(ii,jj) = drug_grid(ii,jj)-drug_grid(ii,jj)*celluptakerate*deltat;

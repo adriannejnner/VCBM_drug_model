@@ -1,4 +1,4 @@
-function gradientplota_v04(pointsmat,fibremat,freecellmat_)
+function gradientplota_stromg_emptyfreecells(pointsmat,fibremat)
 
 [v,c] = voronoin([pointsmat(:,1:2)]); 
 

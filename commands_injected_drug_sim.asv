@@ -75,7 +75,7 @@ tcount = 1;
 locsfibres = find(State{tcount}(:,5)==52);
 fibremat = State{tcount}(locsfibres,:);
 State{tcount}(locsfibres,:)=[];
-gradientplota_stroma_emptyfreecells([State{tcount};freecellmat{tcount}],fibremat)
+gradientplota_stroma_emptyfreecells(State{tcount},fibremat)
 xlim([-10,50])
 ylim([-10 50])
 title('Cells at 1 hours')
@@ -88,7 +88,7 @@ tcount = 10;
 locsfibres = find(State{tcount}(:,5)==52);
 fibremat = State{tcount}(locsfibres,:);
 State{tcount}(locsfibres,:)=[];
-gradientplota_stroma_emptyfreecells([State{tcount};freecellmat{tcount}],fibremat)
+gradientplota_stroma_emptyfreecells(State{tcount},fibremat)
 xlim([-10,50])
 ylim([-10 50])
 title('Cells at 10 hours')
@@ -102,7 +102,7 @@ tcount = 20;
 locsfibres = find(State{tcount}(:,5)==52);
 fibremat = State{tcount}(locsfibres,:);
 State{tcount}(locsfibres,:)=[];
-gradientplota_stroma_emptyfreecells([State{tcount};freecellmat{tcount}],fibremat)
+gradientplota_stroma_emptyfreecells([State{tcount},fibremat)
 xlim([-10,50])
 ylim([-10 50])
 title('Cells at 20 hours')
