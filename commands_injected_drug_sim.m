@@ -113,7 +113,7 @@ ylabel('y dim.')
 
 for ii = 1:total_time
     tumourcells = find(State{ii}(:,5)<4);
-    radius_distance = sqrt((State(tumourcells,1)-20).^2+(State(tumourcells,2)-20).^2);
+    radius_distance = sqrt((State{ii}(tumourcells,1)-20).^2+(State{ii}(tumourcells,2)-20).^2);
     radius_scale =1/5;
     Tvol(ii) =  4/3*pi*(radius_scale*max(radius_distance)).^3;
     Number_Tcells(ii) = length(tumourcells);
@@ -122,41 +122,3 @@ end
 figure
 hold on 
 plot(Tvol)
-
-
-% XXXXXXXXXXXXXXXX
-%calculates the residual between the State and correpsonding data point
-        [residual Tvol Number_Tcells] = model_comparison_to_data(NewState,data);
-
-        Tumour_volume(particle_count,time_interval_stepping) = Tvol;
-        Number_of_cells(particle_count,time_interval_stepping) = Number_Tcells;
-        
-        %record vector of residuals corresponding to each particles
-        %simulation
-        res(particle_count) = residual
-        toc
-
-    
-    %records vector of residuals for the paticles and stores them in a matrix for the different data time points
-    res_mat(time_interval_stepping,:) = res;
-    time_interval_stepping
-    OldState = NewState;
-
-
-% This calculates the mean tumour volume of the 4 mice
-        data = nanmean(Control_tumour_growth(time_interval_stepping,:)); 
-
-figure
-hold on 
-yyaxis left
-plot(data_time(1:5), Tumour_volume,'LineWidth',5)
-yyaxis right
-plot(data_time(1:5), Number_of_cells,'LineWidth',5)
-
-figure
-hold on 
-plot(data_time(1:5), res_mat,'ko','LineWidth',5)
-xlabel('Time (days)')
-ylabel('Residual')
-set(gca,'FontSize',18)
-
