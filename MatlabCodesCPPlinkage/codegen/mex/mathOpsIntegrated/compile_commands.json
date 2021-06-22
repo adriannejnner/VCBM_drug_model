@@ -1,0 +1,62 @@
+[
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   \"C:/Users/jenner2/OneDrive - Queensland University of Technology/Documents/GitHub/TumourCSharp/MatlabCodes_Adrianne/adder.c\" -o build/win64/adder.o",
+    "file": "C:/Users/jenner2/OneDrive - Queensland University of Technology/Documents/GitHub/TumourCSharp/MatlabCodes_Adrianne/adder.c",
+    "output": "build/win64/adder.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   mathOpsIntegrated_data.c -o build/win64/mathOpsIntegrated_data.o",
+    "file": "mathOpsIntegrated_data.c",
+    "output": "build/win64/mathOpsIntegrated_data.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   rt_nonfinite.c -o build/win64/rt_nonfinite.o",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   mathOpsIntegrated_initialize.c -o build/win64/mathOpsIntegrated_initialize.o",
+    "file": "mathOpsIntegrated_initialize.c",
+    "output": "build/win64/mathOpsIntegrated_initialize.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   mathOpsIntegrated_terminate.c -o build/win64/mathOpsIntegrated_terminate.o",
+    "file": "mathOpsIntegrated_terminate.c",
+    "output": "build/win64/mathOpsIntegrated_terminate.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   mathOpsIntegrated.c -o build/win64/mathOpsIntegrated.o",
+    "file": "mathOpsIntegrated.c",
+    "output": "build/win64/mathOpsIntegrated.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_mathOpsIntegrated_api.c -o build/win64/_coder_mathOpsIntegrated_api.o",
+    "file": "interface/_coder_mathOpsIntegrated_api.c",
+    "output": "build/win64/_coder_mathOpsIntegrated_api.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_mathOpsIntegrated_mex.c -o build/win64/_coder_mathOpsIntegrated_mex.o",
+    "file": "interface/_coder_mathOpsIntegrated_mex.c",
+    "output": "build/win64/_coder_mathOpsIntegrated_mex.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_mathOpsIntegrated_info.c -o build/win64/_coder_mathOpsIntegrated_info.o",
+    "file": "interface/_coder_mathOpsIntegrated_info.c",
+    "output": "build/win64/_coder_mathOpsIntegrated_info.o"
+  },
+  {
+    "directory": "C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\" -I \"C:\\Users\\jenner2\\OneDrive - Queensland University of Technology\\Documents\\GitHub\\TumourCSharp\\MatlabCodes_Adrianne\\codegen\\mex\\mathOpsIntegrated\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -D__USE_MINGW_ANSI_STDIO=1   \"C:/Program Files/MATLAB/R2020b/extern/version/c_mexapi_version.c\" -o build/win64/c_mexapi_version.o",
+    "file": "C:/Program Files/MATLAB/R2020b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.o"
+  }
+]

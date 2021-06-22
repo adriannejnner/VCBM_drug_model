@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/cxxfe_ast/R2020b http://schema.mathworks.com/mf0/cxxfe_ast_annotations/20180710">
+  <cxxfe.ast.Project type="cxxfe.ast.Project" uuid="2a02784b-a88b-40bd-a46a-e1789bb4dbf1">
+    <Compilations type="cxxfe.ast.source.CompilationUnit" uuid="a7bf1ca8-c8ab-48dd-a1cd-263e8d09fe8e">
+      <Files type="cxxfe.ast.source.SourceFile" uuid="59ed1e41-b0a4-4d28-8769-b2bbf7e4dd50"/>
+      <Language>CXX</Language>
+      <Annotations type="mwAnnotation.AbsolutePathBuildInfo" uuid="f7822c83-76b0-45c9-aecc-7e3ed1ef6bf5">
+        <headers>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne\added.h</headers>
+        <includePaths>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne</includePaths>
+        <location>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne</location>
+        <sourceFiles>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne\added.cpp</sourceFiles>
+        <libData type="mwAnnotation.LibraryAnnotation" uuid="21ff63ec-535b-48f1-8eba-4b93eece2c25">
+          <architecture>win64</architecture>
+          <matlabVersion>R2020b</matlabVersion>
+          <packageName>ADDMULT</packageName>
+        </libData>
+      </Annotations>
+      <Namespaces type="cxxfe.ast.Namespace" uuid="77fba3c7-8a83-4a7d-91c3-6cf0cc2f7f82">
+        <IsStd>true</IsStd>
+        <Name>std</Name>
+        <Symbols type="cxxfe.ast.types.ClassType" uuid="124b4095-f891-48f6-8b7d-fdd4ebe31bd9">
+          <Linkage>ExternalCXX</Linkage>
+          <NeedsImplicitConstructor>true</NeedsImplicitConstructor>
+          <NeedsImplicitCopyConstructor>true</NeedsImplicitCopyConstructor>
+          <IsIncomplete>true</IsIncomplete>
+          <Name>type_info</Name>
+        </Symbols>
+      </Namespaces>
+      <Namespaces type="cxxfe.ast.Namespace" uuid="2d5b06db-0131-43a4-b8e3-01d81e19873f">
+        <Name>__cxxabiv1</Name>
+        <Annotations type="mwAnnotation.ScopeAnnotation" uuid="87e07497-eda5-471e-8268-489f0a8abca5">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="8c200363-85e2-4c49-8d2e-8222db53bb91">
+            <definitionStatus>Unsupported</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+      </Namespaces>
+      <Symbols type="cxxfe.ast.types.FloatType" uuid="1b214ad4-b1e2-470b-a1b3-dad519e67538">
+        <Kind>LongDouble</Kind>
+        <NumBits>128</NumBits>
+        <Name>long double</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.TypedefType" uuid="ac03a3f9-5388-4ad7-add2-364d53c5f2b2">
+        <Type type="cxxfe.ast.types.FloatType" uuid="1b214ad4-b1e2-470b-a1b3-dad519e67538"/>
+        <Name>__float80</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FloatType" uuid="0a3a810b-d99e-40eb-9827-db65538f1023">
+        <Kind>Float128</Kind>
+        <NumBits>128</NumBits>
+        <Name>__float128</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.TypedefType" uuid="bd748606-6358-47f4-872a-8a08f1e018d6">
+        <Type type="cxxfe.ast.types.FloatType" uuid="0a3a810b-d99e-40eb-9827-db65538f1023"/>
+        <Name>__float128</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.IntegerType" uuid="8bc1292a-e423-42a6-af46-166358b24d72">
+        <IsSigned>false</IsSigned>
+        <Kind>UnsignedInt</Kind>
+        <NumBits>32</NumBits>
+        <Name>unsigned int</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.VoidType" uuid="7af3eac0-1773-4330-9524-bcd983907fa2">
+        <Name>void</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb">
+        <Type type="cxxfe.ast.types.VoidType" uuid="7af3eac0-1773-4330-9524-bcd983907fa2"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.LValueReferenceType" uuid="8b97727b-0e8e-40bf-9fd7-9b282609bd6b">
+        <Type type="cxxfe.ast.types.StructType" uuid="1962cbbd-dd50-40d6-abb8-84dee3d7fb02"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.QualifiedType" uuid="327b30c4-79f9-4626-b1ea-ac7be930bffb">
+        <IsConst>true</IsConst>
+        <Type type="cxxfe.ast.types.StructType" uuid="1962cbbd-dd50-40d6-abb8-84dee3d7fb02"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.LValueReferenceType" uuid="6f0b7638-87e5-4c7f-93de-7764fd2ce253">
+        <Type type="cxxfe.ast.types.QualifiedType" uuid="327b30c4-79f9-4626-b1ea-ac7be930bffb"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="7b9dc65f-0700-47af-9948-3cb5363bc126">
+        <ParamTypes type="cxxfe.ast.types.LValueReferenceType" uuid="6f0b7638-87e5-4c7f-93de-7764fd2ce253"/>
+        <RetType type="cxxfe.ast.types.LValueReferenceType" uuid="8b97727b-0e8e-40bf-9fd7-9b282609bd6b"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.RValueReferenceType" uuid="9139ba0b-8ca3-459e-9dca-a3aebbaf5bd7">
+        <Type type="cxxfe.ast.types.StructType" uuid="1962cbbd-dd50-40d6-abb8-84dee3d7fb02"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="96090040-745c-4b31-9534-f63f888395c8">
+        <ParamTypes type="cxxfe.ast.types.RValueReferenceType" uuid="9139ba0b-8ca3-459e-9dca-a3aebbaf5bd7"/>
+        <RetType type="cxxfe.ast.types.LValueReferenceType" uuid="8b97727b-0e8e-40bf-9fd7-9b282609bd6b"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.StructType" uuid="1962cbbd-dd50-40d6-abb8-84dee3d7fb02">
+        <Annotations type="mwAnnotation.ClassAnnotation" uuid="f2b4b6a9-c366-4ce9-80ee-1532abc471a2">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="aed9bb49-31a7-45bd-af0c-917a10c7c599">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <Linkage>ExternalCXX</Linkage>
+        <Methods type="cxxfe.ast.types.Method" uuid="2d26b086-7cf6-4b51-8bd2-8e328f7c49fe">
+          <IsCompilerGenerated>true</IsCompilerGenerated>
+          <IsInline>true</IsInline>
+          <Params type="cxxfe.ast.Variable" uuid="c2495c88-f5e4-40d2-ac66-2f7b74816a0d">
+            <Type type="cxxfe.ast.types.LValueReferenceType" uuid="6f0b7638-87e5-4c7f-93de-7764fd2ce253"/>
+          </Params>
+          <SpecialKind>Operator</SpecialKind>
+          <Linkage>ExternalCXX</Linkage>
+          <Type type="cxxfe.ast.types.FunctionType" uuid="7b9dc65f-0700-47af-9948-3cb5363bc126"/>
+          <Name>operator=</Name>
+          <DefPos type="cxxfe.ast.source.SourcePosition" uuid="79bf82ff-5dca-4538-be26-8167364c7d6e"/>
+        </Methods>
+        <Methods type="cxxfe.ast.types.Method" uuid="2c715d0d-6c6d-4196-b612-089f55cd97c2">
+          <IsCompilerGenerated>true</IsCompilerGenerated>
+          <IsInline>true</IsInline>
+          <Params type="cxxfe.ast.Variable" uuid="f5300dee-9d14-46a6-b1a8-e851b8b63d58">
+            <Type type="cxxfe.ast.types.RValueReferenceType" uuid="9139ba0b-8ca3-459e-9dca-a3aebbaf5bd7"/>
+          </Params>
+          <SpecialKind>Operator</SpecialKind>
+          <Linkage>ExternalCXX</Linkage>
+          <Type type="cxxfe.ast.types.FunctionType" uuid="96090040-745c-4b31-9534-f63f888395c8"/>
+          <Name>operator=</Name>
+          <DefPos type="cxxfe.ast.source.SourcePosition" uuid="1d444d5d-ca2f-48b8-92c5-b0339569c94a"/>
+        </Methods>
+        <NeedsImplicitConstructor>true</NeedsImplicitConstructor>
+        <NeedsImplicitCopyConstructor>true</NeedsImplicitCopyConstructor>
+        <Members type="cxxfe.ast.types.Member" uuid="2016ff92-a523-438b-bebd-4ba58713bd3b">
+          <Access>Public</Access>
+          <Type type="cxxfe.ast.types.IntegerType" uuid="8bc1292a-e423-42a6-af46-166358b24d72"/>
+          <Name>gp_offset</Name>
+        </Members>
+        <Members type="cxxfe.ast.types.Member" uuid="2b99cfa1-6416-491d-adf4-dcb730febf57">
+          <Access>Public</Access>
+          <Type type="cxxfe.ast.types.IntegerType" uuid="8bc1292a-e423-42a6-af46-166358b24d72"/>
+          <Name>fp_offset</Name>
+        </Members>
+        <Members type="cxxfe.ast.types.Member" uuid="c1ee8018-e154-4c41-aca3-5a38043dab60">
+          <Access>Public</Access>
+          <Type type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+          <Name>overflow_arg_area</Name>
+        </Members>
+        <Members type="cxxfe.ast.types.Member" uuid="d4a088e9-28f8-4486-b4ec-2d8b7f68d444">
+          <Access>Public</Access>
+          <Type type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+          <Name>reg_save_area</Name>
+        </Members>
+        <Name>__va_list_tag</Name>
+        <Scope type="cxxfe.ast.Scope" uuid="4e333ccd-eefd-4279-a4b9-3b243692ef18">
+          <Annotations type="mwAnnotation.ScopeAnnotation" uuid="daafa912-6232-4225-a2ba-2303c1e3563c">
+            <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="69f862fe-3365-44d5-aeb9-3f02624ce202">
+              <definitionStatus>Inaccessible</definitionStatus>
+            </integrationStatus>
+          </Annotations>
+        </Scope>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.ArrayType" uuid="8e6cbfae-e32c-4ea6-8e01-e02081ba6efb">
+        <Dimensions>1</Dimensions>
+        <Type type="cxxfe.ast.types.StructType" uuid="1962cbbd-dd50-40d6-abb8-84dee3d7fb02"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.TypedefType" uuid="a2698b64-3244-4200-87b7-66ee78963787">
+        <Type type="cxxfe.ast.types.ArrayType" uuid="8e6cbfae-e32c-4ea6-8e01-e02081ba6efb"/>
+        <Name>__builtin_va_list</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.IntegerType" uuid="a9a64c28-1fcd-40f0-b2b1-761fdfb6a5e8">
+        <Kind>SignedInt128</Kind>
+        <NumBits>128</NumBits>
+        <Name>__int128_t</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.TypedefType" uuid="e5672a53-e367-4522-8b11-50be1e032821">
+        <Type type="cxxfe.ast.types.IntegerType" uuid="a9a64c28-1fcd-40f0-b2b1-761fdfb6a5e8"/>
+        <Name>__int128_t</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.IntegerType" uuid="335fc51f-419a-4f3a-80cc-dd946b06a05c">
+        <IsSigned>false</IsSigned>
+        <Kind>UnsignedInt128</Kind>
+        <NumBits>128</NumBits>
+        <Name>__uint128_t</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.TypedefType" uuid="0f308399-c0d2-4625-8e05-062bbc738f19">
+        <Type type="cxxfe.ast.types.IntegerType" uuid="335fc51f-419a-4f3a-80cc-dd946b06a05c"/>
+        <Name>__uint128_t</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.StructType" uuid="5f136bac-5ce7-4fc0-9337-5cd3e04285c9">
+        <Annotations type="mwAnnotation.ClassAnnotation" uuid="ee830419-fc1e-4afc-80c1-5542e9cb8405">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="e0dd6f0f-ded9-48e1-ad35-7533a93cc33a">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <Linkage>ExternalCXX</Linkage>
+        <NeedsImplicitConstructor>true</NeedsImplicitConstructor>
+        <NeedsImplicitCopyConstructor>true</NeedsImplicitCopyConstructor>
+        <IsIncomplete>true</IsIncomplete>
+        <Name>_IO_FILE</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.IntegerType" uuid="6a08a06e-d800-40e6-ae5c-c071a16d2f83">
+        <IsSigned>false</IsSigned>
+        <Kind>UnsignedLongLong</Kind>
+        <NumBits>64</NumBits>
+        <Name>unsigned long long</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="6be618e3-8135-4f6a-97ca-35ee5d9ccd8d">
+        <ParamTypes type="cxxfe.ast.types.IntegerType" uuid="6a08a06e-d800-40e6-ae5c-c071a16d2f83"/>
+        <RetType type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.Function" uuid="52536bba-f637-4285-9417-452830a11130">
+        <Annotations type="mwAnnotation.FunctionAnnotation" uuid="e53cebeb-090c-4e87-801f-673de79aaf89">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="a1927c30-659e-48db-a1e4-7ff43a649b9e">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <IsCompilerGenerated>true</IsCompilerGenerated>
+        <Params type="cxxfe.ast.Variable" uuid="66d8f29d-4003-42ad-9845-110ce8e0bc4e">
+          <Type type="cxxfe.ast.types.IntegerType" uuid="6a08a06e-d800-40e6-ae5c-c071a16d2f83"/>
+        </Params>
+        <SpecialKind>Operator</SpecialKind>
+        <StorageClass>Extern</StorageClass>
+        <Type type="cxxfe.ast.types.FunctionType" uuid="6be618e3-8135-4f6a-97ca-35ee5d9ccd8d"/>
+        <Name>operator new</Name>
+        <DefPos type="cxxfe.ast.source.SourcePosition" uuid="fe5fb145-8c36-4f63-a659-5644d4d285d5"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="f9a11f85-f1e2-401c-9706-61a790a61c23">
+        <ParamTypes type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+        <RetType type="cxxfe.ast.types.VoidType" uuid="7af3eac0-1773-4330-9524-bcd983907fa2"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.Function" uuid="746155f6-420e-48c0-81f0-e2262cccecdb">
+        <Annotations type="mwAnnotation.FunctionAnnotation" uuid="1c65f043-710c-4da4-8dd1-f189e7194fd9">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="550e3479-7dc7-4726-9801-232f977c64e6">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <IsCompilerGenerated>true</IsCompilerGenerated>
+        <Params type="cxxfe.ast.Variable" uuid="e9bbf883-03b7-490e-9def-7471768fb701">
+          <Type type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+        </Params>
+        <SpecialKind>Operator</SpecialKind>
+        <StorageClass>Extern</StorageClass>
+        <Type type="cxxfe.ast.types.FunctionType" uuid="f9a11f85-f1e2-401c-9706-61a790a61c23"/>
+        <Name>operator delete</Name>
+        <DefPos type="cxxfe.ast.source.SourcePosition" uuid="ab02ed33-9105-4011-9759-7fcf4a45f6c5"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="4322b03e-289e-49ad-9486-da2fc4e24e75">
+        <ParamTypes type="cxxfe.ast.types.IntegerType" uuid="6a08a06e-d800-40e6-ae5c-c071a16d2f83"/>
+        <RetType type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.Function" uuid="51628b79-9fc8-4426-b004-da9fc4be586b">
+        <Annotations type="mwAnnotation.FunctionAnnotation" uuid="cab61f7c-bba2-44df-99c4-699dfa985b57">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="8b6f3c69-1241-4e74-adbf-f379f2004cf1">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <IsCompilerGenerated>true</IsCompilerGenerated>
+        <Params type="cxxfe.ast.Variable" uuid="b26f48fd-d50b-4f91-997f-51d1d7bc0e49">
+          <Type type="cxxfe.ast.types.IntegerType" uuid="6a08a06e-d800-40e6-ae5c-c071a16d2f83"/>
+        </Params>
+        <SpecialKind>Operator</SpecialKind>
+        <StorageClass>Extern</StorageClass>
+        <Type type="cxxfe.ast.types.FunctionType" uuid="4322b03e-289e-49ad-9486-da2fc4e24e75"/>
+        <Name>operator new[]</Name>
+        <DefPos type="cxxfe.ast.source.SourcePosition" uuid="88850e02-54a7-47a4-b7c3-aca38d88638f"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="98df8a71-a76d-4f4b-a57b-b4aaa0d32526">
+        <ParamTypes type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+        <RetType type="cxxfe.ast.types.VoidType" uuid="7af3eac0-1773-4330-9524-bcd983907fa2"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.Function" uuid="1569b7f7-1852-45d0-861f-9a6d81ad6066">
+        <Annotations type="mwAnnotation.FunctionAnnotation" uuid="8a5fd35d-a156-4a1f-b832-87a19cc5658d">
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="be01a750-67fe-49a1-9957-e16eb52be4b8">
+            <definitionStatus>Inaccessible</definitionStatus>
+          </integrationStatus>
+        </Annotations>
+        <IsCompilerGenerated>true</IsCompilerGenerated>
+        <Params type="cxxfe.ast.Variable" uuid="c7a53214-66ac-4ee9-9b75-38d922a4870d">
+          <Type type="cxxfe.ast.types.PointerType" uuid="90b67cd9-14e0-42c4-9032-7c24789c1ddb"/>
+        </Params>
+        <SpecialKind>Operator</SpecialKind>
+        <StorageClass>Extern</StorageClass>
+        <Type type="cxxfe.ast.types.FunctionType" uuid="98df8a71-a76d-4f4b-a57b-b4aaa0d32526"/>
+        <Name>operator delete[]</Name>
+        <DefPos type="cxxfe.ast.source.SourcePosition" uuid="98bc90fd-68dc-47b2-8871-bff7a7b6878e"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a">
+        <Kind>Double</Kind>
+        <NumBits>64</NumBits>
+        <Name>double</Name>
+      </Symbols>
+      <Symbols type="cxxfe.ast.types.FunctionType" uuid="a8e88caa-d3d4-49f0-8601-6ee03f12e050">
+        <ParamTypes type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a"/>
+        <ParamTypes type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a"/>
+        <RetType type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a"/>
+      </Symbols>
+      <Symbols type="cxxfe.ast.Function" uuid="755fe799-ea3f-445a-a89f-f4931552d348">
+        <Annotations type="mwAnnotation.FunctionAnnotation" uuid="c60352aa-9f6a-413c-8158-13211bb7061f">
+          <cppSignature>double added(double in1,double in2)</cppSignature>
+          <cppType>[double]</cppType>
+          <description>clib.ADDMULT.added    Representation of C++ function added.</description>
+          <inputs type="mwAnnotation.Argument" uuid="a67e91bd-abaf-4c03-86d3-696995b60207">
+            <cppPosition>1</cppPosition>
+            <cppType>[double]</cppType>
+            <mwType>double</mwType>
+            <name>in1</name>
+            <storage>Value</storage>
+            <validTypes>double</validTypes>
+          </inputs>
+          <inputs type="mwAnnotation.Argument" uuid="a755b795-346b-4144-a901-fbd427f3f7db">
+            <cppPosition>2</cppPosition>
+            <cppType>[double]</cppType>
+            <mwType>double</mwType>
+            <name>in2</name>
+            <storage>Value</storage>
+            <validTypes>double</validTypes>
+          </inputs>
+          <name>clib.ADDMULT.added</name>
+          <outputs type="mwAnnotation.Argument" uuid="d4db2090-a22c-408e-b4d9-532dd991a593">
+            <cppType>[double]</cppType>
+            <direction>Out</direction>
+            <isOwned>true</isOwned>
+            <mwType>double</mwType>
+            <name>RetVal</name>
+            <storage>Value</storage>
+            <validTypes>double</validTypes>
+          </outputs>
+          <ptKey>F/added@[double],[double]#[double]</ptKey>
+          <integrationStatus type="mwAnnotation.IntegrationStatus" uuid="5254841e-a116-4999-9653-d9ff37618d30"/>
+        </Annotations>
+        <Params type="cxxfe.ast.Variable" uuid="8e594927-ddaf-47f0-b5b7-d4a5577edbe3">
+          <Type type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a"/>
+          <Name>in1</Name>
+        </Params>
+        <Params type="cxxfe.ast.Variable" uuid="ca790a90-9048-4c16-9519-8ad657255008">
+          <Type type="cxxfe.ast.types.FloatType" uuid="16270bf6-7c23-43d8-a789-b16967f8f72a"/>
+          <Name>in2</Name>
+        </Params>
+        <StorageClass>Extern</StorageClass>
+        <Type type="cxxfe.ast.types.FunctionType" uuid="a8e88caa-d3d4-49f0-8601-6ee03f12e050"/>
+        <Name>added</Name>
+        <DeclPos type="cxxfe.ast.source.SourcePosition" uuid="06e066c4-2625-49a1-bd81-df6592b513ed">
+          <Col>8</Col>
+          <File type="cxxfe.ast.source.SourceFile" uuid="59ed1e41-b0a4-4d28-8769-b2bbf7e4dd50"/>
+          <Line>1</Line>
+        </DeclPos>
+        <DefPos type="cxxfe.ast.source.SourcePosition" uuid="ce79296f-9ccc-45f4-845a-3ffca7323abd">
+          <Col>8</Col>
+          <File type="cxxfe.ast.source.SourceFile" uuid="59ed1e41-b0a4-4d28-8769-b2bbf7e4dd50"/>
+          <Line>1</Line>
+        </DefPos>
+      </Symbols>
+    </Compilations>
+    <Files type="cxxfe.ast.source.SourceFile" uuid="59ed1e41-b0a4-4d28-8769-b2bbf7e4dd50">
+      <IsTopLevelFile>true</IsTopLevelFile>
+      <Path>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne\added.h</Path>
+      <WrittenName>C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\TumourCSharp\MatlabCodes_Adrianne\added.h</WrittenName>
+    </Files>
+    <LongDoubleNumBits>128</LongDoubleNumBits>
+    <PointerNumBits>64</PointerNumBits>
+    <PtrDiffTypeKind>SignedLongLong</PtrDiffTypeKind>
+    <SizeTypeKind>UnsignedLongLong</SizeTypeKind>
+    <WcharTypeKind>SignedInt</WcharTypeKind>
+  </cxxfe.ast.Project>
+</MF0>
