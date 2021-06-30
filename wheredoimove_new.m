@@ -46,6 +46,9 @@ for muveccount = 1:size(Fij,1)
     if svalspercell(muveccount,1)>50
         muvec(muveccount) = 5*1e-4;
     else
+        muveccount
+        mu
+        muvec
         muvec(muveccount) = mu;
     end
 end

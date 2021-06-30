@@ -41,6 +41,34 @@ initial_drug_grid(50,50) = 50;
 %simulates the system forward by tinterval
 [State,Drug_grid,freecellmat] = model_simulator_singledruginjection(State,tinterval,params,total_time,initial_drug_grid);
       
+
+%v = VideoWriter(pathVideoAVI,'Uncompressed AVI');
+v = VideoWriter('Poly7.avi');
+v.FrameRate = 1;
+open(v)
+figure
+hold on 
+for tcount=1:params.lengthtime
+  
+locsfibres = find(State{tcount}(:,5)==52);
+fibremat = State{tcount}(locsfibres,:);
+State{tcount}(locsfibres,:)=[];
+gradientplota_stroma_emptyfreecells([State{tcount};freecellmat{tcount}],fibremat)
+xlim([-10,50])
+ylim([-10 50])
+%title('Cells at 1 hours')
+xlabel('x dim.')
+ylabel('y dim.')
+
+frame = getframe(gcf)
+writeVideo(v,frame);
+clf
+end
+close(v)
+
+STOP
+
+%%
 figure
 hold on 
 subplot(2,2,1)
