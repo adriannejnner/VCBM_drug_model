@@ -1,5 +1,7 @@
 function [Framp0_,drug_grid,freecellmat] = model_evolver_drug(pointsmat,params,drug_grid,freecellmat)
 
+global p_0 s page rmin eps mu Delta_t eta lengthtime dMAX mumage
+
 %Colum 1 and 2 are position
 %Colum 3 represents slength
 %Colum 4 locates the sibling
@@ -143,7 +145,7 @@ function [Framp0_,drug_grid,freecellmat] = model_evolver_drug(pointsmat,params,d
     %creating matrix off "empty" cells that are just used for plotting to
     %make sure no unrealistic cell sizes are introduced
     pointstoremove = find(pointsmat(:,5)== 3 & pointsmat(:,6)==dage);
-    size(pointstoremove)
+   
     freecellmat = [freecellmat;[pointsmat(pointstoremove,1:4),repmat(5,length(pointstoremove),1),NaN(length(pointstoremove),1)]];
     pointsmat(pointstoremove,:) = [];
     

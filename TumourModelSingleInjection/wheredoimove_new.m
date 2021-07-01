@@ -1,4 +1,4 @@
-function  ri_new = wheredoimove(points,TRI,pointtomove,k,sarray)
+function  ri_new = wheredoimove(points,TRI,pointtomove,k,sarray,params)
 
 global s mu Delta_t eta
 
@@ -46,9 +46,6 @@ for muveccount = 1:size(Fij,1)
     if svalspercell(muveccount,1)>50
         muvec(muveccount) = 5*1e-4;
     else
-        muveccount
-        mu
-        muvec
         muvec(muveccount) = mu;
     end
 end
