@@ -3,8 +3,7 @@
 % of the c++ code to your path 
 
 %% Add path of the C++ model
-addpath('C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\VCBM_drug_model\TumourModelParticleFiltering')
-addpath('C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\VCBM_drug_model\TumourModelParticleFiltering\TumourModel')
+addpath('Model','-end') % adds the path of the C++ code
 
 %% Load in data for tumour growth
 load('Tumour_growth_data.mat')
@@ -169,8 +168,8 @@ l1 = plot(data_time(1:max_time), Control_tumour_growth(1:max_time, 1),'o:','Colo
 plot(data_time(1:max_time), Control_tumour_growth(1:max_time, 2:n_mice),'o:','Color','red','LineWidth',1)
 l3 = plot(data_time(2:max_time), tvol_mean_predicted(1 : max_time - 1),'*','Color','blue','LineWidth',5)
 plot(data_time(2:max_time), tvol_mean_predicted(1 : max_time - 1),'*','Color','blue','LineWidth',5)
-l4 = plot(data_time(1 : max_time), tvol_mean_corrected(1 : max_time ),'*','Color','yellow','LineWidth',5)
-plot(data_time(1 : max_time), tvol_mean_corrected(1 : max_time),'*','Color','yellow','LineWidth',5)
+l4 = plot(data_time(2 : max_time), tvol_mean_corrected(1 : max_time -1),'*','Color','yellow','LineWidth',5)
+plot(data_time(2 : max_time), tvol_mean_corrected(1 : max_time-1),'*','Color','yellow','LineWidth',5)
 xlabel('Time (days)')
 ylabel('Tumour Volume')
 set(gca,'FontSize',18)

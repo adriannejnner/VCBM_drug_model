@@ -10,8 +10,8 @@ total_time = 24;% set total time of simulation (hours)
 params.grid_size = 100; %set size of PDE grid
 initial_drug_grid = zeros(params.grid_size,params.grid_size); %initialise drug in grid
 C0 = 50; %total drug administered
-xinj = 50; %x location of drug injection
-yinj = 50; %y location of drug injection
+xinj = 50; %x location of drug injection - between 0 and 100
+yinj = 50; %y location of drug injection - between 0 and 100
 initial_drug_grid(xinj,yinj) = C0; %changing this position in initial drug grid to have injection
 
 %simulates growth of pancreatic cancer under injection for total_time hours
