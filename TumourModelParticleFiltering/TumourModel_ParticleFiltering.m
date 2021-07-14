@@ -1,6 +1,6 @@
-%% The below code runs the particle filtering algorithm for the VCBM model 
-% of pancreatic tumour growth. To run, you will first need to add the directory 
-% of the c++ code to your path 
+%% The below code runs the particle filtering algorithm for the VCBM model
+% of pancreatic tumour growth. To run, you will first need to add the directory
+% of the c++ code to your path
 
 %% Add path of the C++ model
 addpath('Model','-end') % adds the path of the C++ code
@@ -33,19 +33,21 @@ gage_min = 0;
 
 page = 2; % we are not going to fit this parameter but we need to set it
 
+obsSigma = sqrt(2*2500);
+
 %% Initialise particle filtering
 
 %set the number of particles to simulate for
-n = 50;
+n = 250;
 seed = 42;
-rng(seed,'twister') % rng(seed) specifies the seed for the random number generator 
+rng(seed,'twister') % rng(seed) specifies the seed for the random number generator
 
 %grow tumour from 1 cancer cell for n particles
 startVolume = mean(Control_tumour_growth(1,:)); %volume to grow initial tumours to
 for i = 1:n
     pf = clib.Model.SeedAndGrowToStartVolume(p0_mu, psc_mu, dmax_mu, gage_mu, page, startVolume);
     PFTumourVolume(i) = pf.TumourVolume(); %calculates tumour volume of one particle's simulation
-    
+
     particle{i} = clib.Model.CreateNewParticle(0.3, 0, 30, 160, 2, pf); %stores particles start tumour pointer
 
     %create matrix of residuals of each particle to each mouse
@@ -76,23 +78,23 @@ for t = 1:max_time-1
         gagee(i) = gage_vec(t, i);
         pscc(i)  = psc_vec(t, i);
     end
-    
+
     m = 0.0;
     for i = 1:n
         m = m + PFTumourVolume(i);
     end
     tvol_mean_corrected(t) = m / n;
 
-    
+
     for i = 1:n %for each particle
-            
+
             %update particle's parameter values
             particle{i} = clib.Model.CreateNewParticle(p00(i), pscc(i), dmaxx(i), gagee(i), page, particle{i}); %stores particles start tumour pointer
-            
-            %simulate particle tumour growth forward one day            
+
+            %simulate particle tumour growth forward one day
             PFTumourVolume(i) = particle{i}.SimulateOneDay(1); %simulates a day of tumour growth for each particle
     end
-    
+
      for j = 1:n_mice
             % This calculates the mean tumour volume of the 4 mice
             data = nanmean(Control_tumour_growth(t+1, j:j));
@@ -102,21 +104,24 @@ for t = 1:max_time-1
                 res(j, i) = (PFTumourVolume(i)- data);
             end
      end
-     
+
     % records vector of residuals for the paticles and stores them in a
     % matrix for the different data time points
     res_mat(t+1, :, :) = res;
     tvol_mat(t+1, :)   = PFTumourVolume;
     tvol_mean_predicted(t) = mean(PFTumourVolume)
     t
-    
+
     for i = 1:n
         log_weight(t, i) = 0;
         for j = 1:n_mice
-            log_weight(t, i) = log_weight(t, i) - 1/(4*2500) * res(j, i).^2;
+            log_weight(t, i) = log_weight(t, i) - 1/(2 * obsSigma^2) * res(j, i).^2;
         end
-        non_norm_weight(t, i) = exp(log_weight(t, i));
+
     end
+    % To avoid underflow when we move from log space
+    max_log_weight = max(log_weight(t, :));
+    non_norm_weight(t, :) = exp(log_weight(t, :) - max_log_weight);
     weight(t, :) = non_norm_weight(t, :) ./ sum(non_norm_weight(t, :));
 
     ind = resampstr(weight(t, :));
@@ -124,15 +129,15 @@ for t = 1:max_time-1
     %probabilites P. P is an array of probabilities, which are not
     %neccessarily normalised, though they must be non-negative !! - this is
     %using stratified resampling
-    
+
     G(t, :) = ind;
     for i = 1:n
         p0_vec(t + 1, i)     = exp(log(p0_vec(t, ind(i)) - p0_min)     + random(p0_vec_pd, 1, 1))    + p0_min;
         dmax_vec(t + 1, i)  = exp(log(dmax_vec(t, ind(i)) - dmax_min)  + random(dmax_mu_pd, 1, 1))  + dmax_min;
         gage_vec(t + 1, i)  = floor(exp(log(gage_vec(t, ind(i))  - gage_min)  + random(gage_mu_pd, 1, 1)))  + gage_min;
         psc_vec(t + 1, i) = exp(log(psc_vec(t, ind(i)) - psc_min) + random(psc_mu_pd, 1, 1)) + psc_min;
-    end    
-     
+    end
+
 end
 
 %% Plot the output of the particle filtering :)
@@ -190,7 +195,7 @@ legend([l1],{'Particles'})
 figure
 hold on
 l1 = plot(data_time(1 : max_time), mean(p0_vec, 2),'o:','Color','red','LineWidth',1)
-ylim([p0_min p0_mu + 50.0]);
+ylim([p0_min p0_mu + 0.5]);
 xlabel('Time (days)')
 ylabel('r')
 set(gca,'FontSize',18)
@@ -217,7 +222,7 @@ set(gca,'FontSize',18)
 figure
 hold on
 l1 = plot(data_time(1 : max_time), mean(psc_vec, 2),'o:','Color','red','LineWidth',1)
-ylim([psc_min psc_mu + 1.0]);
+ylim([psc_min psc_mu + 0.00001]);
 xlabel('Time (days)')
 ylabel('psc')
 set(gca,'FontSize',18)
