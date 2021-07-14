@@ -33,10 +33,12 @@ gage_min = 0;
 
 page = 2; % we are not going to fit this parameter but we need to set it
 
+obsSigma = sqrt(2*2500);
+
 %% Initialise particle filtering
 
 %set the number of particles to simulate for
-n = 50;
+n = 250;
 seed = 42;
 rng(seed,'twister') % rng(seed) specifies the seed for the random number generator
 
@@ -113,10 +115,13 @@ for t = 1:max_time-1
     for i = 1:n
         log_weight(t, i) = 0;
         for j = 1:n_mice
-            log_weight(t, i) = log_weight(t, i) - 1/(4*2500) * res(j, i).^2;
+            log_weight(t, i) = log_weight(t, i) - 1/(2 * obsSigma^2) * res(j, i).^2;
         end
-        non_norm_weight(t, i) = exp(log_weight(t, i));
+
     end
+    % To avoid underflow when we move from log space
+    max_log_weight = max(log_weight(t, :));
+    non_norm_weight(t, :) = exp(log_weight(t, :) - max_log_weight);
     weight(t, :) = non_norm_weight(t, :) ./ sum(non_norm_weight(t, :));
 
     ind = resampstr(weight(t, :));
