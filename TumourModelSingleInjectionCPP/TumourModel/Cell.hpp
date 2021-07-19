@@ -147,7 +147,7 @@ public:
 		int nearestX = round(currentState.X) + gridRadius;
 		int nearestY = round(currentState.Y) + gridRadius;
 		double concentration = drugConcentration[nearestY * (gridRadius*2+1) + nearestX];
-		return concentration > 0 && parameters->WithProbability(concentration / (concentration + 1));
+		return concentration > 0 && parameters->WithProbability(concentration / (concentration + 1)); // we need to make this a parameter we set instead of being just 1
 	}
 
 	void Die()
@@ -192,6 +192,11 @@ public:
 		newState.X = currentState.X + Fx * Params::Delta_t;
 		newState.Y = currentState.Y + Fy * Params::Delta_t;
 	}
+	
+	//void Disintegrate()
+	//{
+		
+	//}
 
 	Cell* PossiblyPoliferate(vector<Cell*> &boundaryCells, Params* parameters)
 	{

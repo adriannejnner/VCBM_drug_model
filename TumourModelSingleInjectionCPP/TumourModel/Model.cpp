@@ -18,13 +18,17 @@ Pancreas* SeedAndGrowToStartVolume(double p0, double psc, int dmax, int gage, in
 	return pancreas;
 }
 
-void SimulateWholeExperiment(double p0, double psc, int dmax, int gage, int page, double startVolume, int timeSteps, int xloc, int yloc, double amount, double volumes[])//, void(*render)(int, int, Pancreas*, int))
+void SimulateWholeExperiment(double p0, double psc, int dmax, int gage, int page, double startVolume, int timeSteps, double volumes[])//, void(*render)(int, int, Pancreas*, int))
 {
 	Pancreas* pancreas = SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, startVolume);//, render);
 
 	volumes[0] = pancreas->TumourVolume();
 
-	pancreas->InjectDrug(xloc, yloc, amount);
+	int xloc = 0;
+	int yloc = 50;
+	double conc = 100.0;
+	
+	pancreas->InjectDrug(xloc, yloc, conc);
 
 	for (int day = 1; day < timeSteps; day++)
 	{
@@ -58,4 +62,9 @@ void PerformMultipleRuns(double p0, double psc, int dmax, int gage, int page, do
 
 	for (int j = 0; j < timeSteps; j++)
 		volumes[j] /= iterations;
+}
+
+Pancreas* CreateNewParticle(double p0, double psc, int dmax, int gage, int page, Pancreas* pancreas)
+{
+	return pancreas->CreateNewParticle(new Params(p0, psc, dmax, gage, page));
 }

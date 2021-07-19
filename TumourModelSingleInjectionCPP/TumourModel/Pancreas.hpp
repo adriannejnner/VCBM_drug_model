@@ -390,6 +390,9 @@ public:
 
 			if (cell->currentState.type == CellType::Healthy)
 				cell->Move();
+			else if (cell->currentState.type == CellType::Dead)
+				cell->Move();
+				//cell->Disintegrate(); Need to add a function that slowly disintegrates dead cell and turns it into empty cell
 			else
 			{
 				if (cell->DrugInducedDeath(parameters, drugConcentration, gridRadius))
@@ -422,7 +425,7 @@ public:
 	}
 
 	double SimulateOneDay(int day)//, void (*render)(int, int, Pancreas*, int))
-	{
+	{	
 		DetermineNeighbours();
 
 		for (int hour = 1; hour <= Params::tinterval; hour++)
