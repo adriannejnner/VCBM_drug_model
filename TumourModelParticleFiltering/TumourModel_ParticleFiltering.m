@@ -36,7 +36,7 @@ page = 2; % we are not going to fit this parameter but we need to set it
 %% Initialise particle filtering
 
 %set the number of particles to simulate for
-n = 50;
+n = 500;
 seed = 42;
 rng(seed,'twister') % rng(seed) specifies the seed for the random number generator 
 
