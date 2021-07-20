@@ -11,8 +11,24 @@
 function libDef = defineModel()
 libDef = clibgen.LibraryDefinition("ModelData.xml");
 %% OutputFolder and Libraries 
-libDef.OutputFolder = "C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\VCBM_drug_model\TumourModelSingleInjectionCPP";
+libDef.OutputFolder = "C:\Users\adria\GBM_oHSV1_app\GBM_oHSV1_app\VCBM_drug_model\TumourModelSingleInjectionCPP";
 libDef.Libraries = "";
+
+%% C++ function type |void(*)(double, double)| with MATLAB name |clib.type.Model.Function1| 
+addFunctionType(libDef, "void(*)(double, double)", "MATLABName", "clib.type.Model.Function1", ...
+    "Description", "clib.type.Model.Function1    C++ function type mwCppAnonymousTypes::Function1."); % Modify help description values as needed.
+
+%% C++ function type |void(*)(CellType)| with MATLAB name |clib.type.Model.Function2| 
+addFunctionType(libDef, "void(*)(CellType)", "MATLABName", "clib.type.Model.Function2", ...
+    "Description", "clib.type.Model.Function2    C++ function type mwCppAnonymousTypes::Function2."); % Modify help description values as needed.
+
+%% C++ function type |void(*)()| with MATLAB name |clib.type.Model.Function3| 
+addFunctionType(libDef, "void(*)()", "MATLABName", "clib.type.Model.Function3", ...
+    "Description", "clib.type.Model.Function3    C++ function type mwCppAnonymousTypes::Function3."); % Modify help description values as needed.
+
+%% C++ function type |void(*)(Cell *, Cell *)| with MATLAB name |clib.type.Model.Function4| 
+addFunctionType(libDef, "void(*)(Cell *, Cell *)", "MATLABName", "clib.type.Model.Function4", ...
+    "Description", "clib.type.Model.Function4    C++ function type mwCppAnonymousTypes::Function4."); % Modify help description values as needed.
 
 %% C++ enumeration |CellType| with MATLAB name |clib.Model.CellType| 
 addEnumeration(libDef, "CellType", "int32",...
@@ -21,6 +37,7 @@ addEnumeration(libDef, "CellType", "int32",...
       "Dead",...  % 3
       "Healthy",...  % 4
       "PSC",...  % 5
+      "Empty",...  % 6
     ],...
     "MATLABName", "clib.Model.CellType", ...
     "Description", "clib.Model.CellType    Representation of C++ enumeration CellType."); % Modify help description values as needed.
@@ -33,14 +50,14 @@ CellStateDefinition = addClass(libDef, "CellState", "MATLABName", "clib.Model.Ce
 % C++ Signature: CellState::CellState()
 CellStateConstructor1Definition = addConstructor(CellStateDefinition, ...
     "CellState::CellState()", ...
-    "Description", "clib.Model.CellState.CellState    Constructor of C++ class CellState."); % Modify help description values as needed.
+    "Description", "clib.Model.CellState    Constructor of C++ class CellState."); % Modify help description values as needed.
 validate(CellStateConstructor1Definition);
 
 %% C++ class constructor for C++ class |CellState| 
 % C++ Signature: CellState::CellState(CellState const & input1)
 CellStateConstructor2Definition = addConstructor(CellStateDefinition, ...
     "CellState::CellState(CellState const & input1)", ...
-    "Description", "clib.Model.CellState.CellState    Constructor of C++ class CellState."); % Modify help description values as needed.
+    "Description", "clib.Model.CellState    Constructor of C++ class CellState."); % Modify help description values as needed.
 defineArgument(CellStateConstructor2Definition, "input1", "clib.Model.CellState", "input");
 validate(CellStateConstructor2Definition);
 
@@ -79,22 +96,24 @@ ParamsDefinition = addClass(libDef, "Params", "MATLABName", "clib.Model.Params",
     "Description", "clib.Model.Params    Representation of C++ class Params."); % Modify help description values as needed.
 
 %% C++ class constructor for C++ class |Params| 
-% C++ Signature: Params::Params(double p_0,double p_psc,double dmax,int gage,int page)
+% C++ Signature: Params::Params(double p_0,double p_psc,double dmax,int gage,int page,double EC50)
 ParamsConstructor1Definition = addConstructor(ParamsDefinition, ...
-    "Params::Params(double p_0,double p_psc,double dmax,int gage,int page)", ...
-    "Description", "clib.Model.Params.Params    Constructor of C++ class Params."); % Modify help description values as needed.
+    "Params::Params(double p_0,double p_psc,double dmax,int gage,int page,double EC50)", ...
+    "Description", "clib.Model.Params    Constructor of C++ class Params."); % Modify help description values as needed.
 defineArgument(ParamsConstructor1Definition, "p_0", "double");
 defineArgument(ParamsConstructor1Definition, "p_psc", "double");
 defineArgument(ParamsConstructor1Definition, "dmax", "double");
 defineArgument(ParamsConstructor1Definition, "gage", "int32");
 defineArgument(ParamsConstructor1Definition, "page", "int32");
+defineArgument(ParamsConstructor1Definition, "EC50", "double");
 validate(ParamsConstructor1Definition);
 
 %% C++ class method |RandomDouble| for C++ class |Params| 
 % C++ Signature: double Params::RandomDouble()
 RandomDoubleDefinition = addMethod(ParamsDefinition, ...
     "double Params::RandomDouble()", ...
-    "Description", "clib.Model.Params.RandomDouble    Method of C++ class Params."); % Modify help description values as needed.
+    "MATLABName", "RandomDouble", ...
+    "Description", "RandomDouble    Method of C++ class Params."); % Modify help description values as needed.
 defineOutput(RandomDoubleDefinition, "RetVal", "double");
 validate(RandomDoubleDefinition);
 
@@ -102,7 +121,8 @@ validate(RandomDoubleDefinition);
 % C++ Signature: bool Params::WithProbability(double prob)
 WithProbabilityDefinition = addMethod(ParamsDefinition, ...
     "bool Params::WithProbability(double prob)", ...
-    "Description", "clib.Model.Params.WithProbability    Method of C++ class Params."); % Modify help description values as needed.
+    "MATLABName", "WithProbability", ...
+    "Description", "WithProbability    Method of C++ class Params."); % Modify help description values as needed.
 defineArgument(WithProbabilityDefinition, "prob", "double");
 defineOutput(WithProbabilityDefinition, "RetVal", "logical");
 validate(WithProbabilityDefinition);
@@ -132,6 +152,11 @@ addProperty(ParamsDefinition, "dmax", "double", ...
 addProperty(ParamsDefinition, "p_psc", "double", ...
     "Description", "double    Data member of C++ class Params."); % Modify help description values as needed.
 
+%% C++ class public data member |EC50| for C++ class |Params| 
+% C++ Signature: double Params::EC50
+addProperty(ParamsDefinition, "EC50", "double", ...
+    "Description", "double    Data member of C++ class Params."); % Modify help description values as needed.
+
 %% C++ class |Cell| with MATLAB name |clib.Model.Cell| 
 CellDefinition = addClass(libDef, "Cell", "MATLABName", "clib.Model.Cell", ...
     "Description", "clib.Model.Cell    Representation of C++ class Cell."); % Modify help description values as needed.
@@ -140,7 +165,7 @@ CellDefinition = addClass(libDef, "Cell", "MATLABName", "clib.Model.Cell", ...
 % C++ Signature: Cell::Cell(double X,double Y,double spring_length,Cell * sibling,CellType type,int age)
 CellConstructor1Definition = addConstructor(CellDefinition, ...
    "Cell::Cell(double X,double Y,double spring_length,Cell * sibling,CellType type,int age)", ...
-   "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
+   "Description", "clib.Model.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
 defineArgument(CellConstructor1Definition, "X", "double");
 defineArgument(CellConstructor1Definition, "Y", "double");
 defineArgument(CellConstructor1Definition, "spring_length", "double");
@@ -153,7 +178,7 @@ validate(CellConstructor1Definition);
 % C++ Signature: Cell::Cell(Cell * cell)
 CellConstructor2Definition = addConstructor(CellDefinition, ...
    "Cell::Cell(Cell * cell)", ...
-   "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
+   "Description", "clib.Model.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
 defineArgument(CellConstructor2Definition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
 validate(CellConstructor2Definition);
 
@@ -161,35 +186,40 @@ validate(CellConstructor2Definition);
 % C++ Signature: void Cell::Renew()
 RenewDefinition = addMethod(CellDefinition, ...
     "void Cell::Renew()", ...
-    "Description", "clib.Model.Cell.Renew    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "Renew", ...
+    "Description", "Renew    Method of C++ class Cell."); % Modify help description values as needed.
 validate(RenewDefinition);
 
 %% C++ class method |UpdateState| for C++ class |Cell| 
 % C++ Signature: void Cell::UpdateState()
 UpdateStateDefinition = addMethod(CellDefinition, ...
     "void Cell::UpdateState()", ...
-    "Description", "clib.Model.Cell.UpdateState    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "UpdateState", ...
+    "Description", "UpdateState    Method of C++ class Cell."); % Modify help description values as needed.
 validate(UpdateStateDefinition);
 
 %% C++ class method |Infect| for C++ class |Cell| 
 % C++ Signature: void Cell::Infect()
 InfectDefinition = addMethod(CellDefinition, ...
     "void Cell::Infect()", ...
-    "Description", "clib.Model.Cell.Infect    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "Infect", ...
+    "Description", "Infect    Method of C++ class Cell."); % Modify help description values as needed.
 validate(InfectDefinition);
 
 %% C++ class method |clearNeighbours| for C++ class |Cell| 
 % C++ Signature: void Cell::clearNeighbours()
 clearNeighboursDefinition = addMethod(CellDefinition, ...
     "void Cell::clearNeighbours()", ...
-    "Description", "clib.Model.Cell.clearNeighbours    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "clearNeighbours", ...
+    "Description", "clearNeighbours    Method of C++ class Cell."); % Modify help description values as needed.
 validate(clearNeighboursDefinition);
 
 %% C++ class method |OnBoundary| for C++ class |Cell| 
 % C++ Signature: bool Cell::OnBoundary()
 OnBoundaryDefinition = addMethod(CellDefinition, ...
     "bool Cell::OnBoundary()", ...
-    "Description", "clib.Model.Cell.OnBoundary    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "OnBoundary", ...
+    "Description", "OnBoundary    Method of C++ class Cell."); % Modify help description values as needed.
 defineOutput(OnBoundaryDefinition, "RetVal", "logical");
 validate(OnBoundaryDefinition);
 
@@ -197,7 +227,8 @@ validate(OnBoundaryDefinition);
 % C++ Signature: bool Cell::TooCrowded()
 TooCrowdedDefinition = addMethod(CellDefinition, ...
     "bool Cell::TooCrowded()", ...
-    "Description", "clib.Model.Cell.TooCrowded    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "TooCrowded", ...
+    "Description", "TooCrowded    Method of C++ class Cell."); % Modify help description values as needed.
 defineOutput(TooCrowdedDefinition, "RetVal", "logical");
 validate(TooCrowdedDefinition);
 
@@ -205,7 +236,8 @@ validate(TooCrowdedDefinition);
 % C++ Signature: double Cell::DistanceSquaredTo(Cell * cell)
 DistanceSquaredToDefinition = addMethod(CellDefinition, ...
    "double Cell::DistanceSquaredTo(Cell * cell)", ...
-   "Description", "clib.Model.Cell.DistanceSquaredTo    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "DistanceSquaredTo", ...
+   "Description", "DistanceSquaredTo    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(DistanceSquaredToDefinition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
 defineOutput(DistanceSquaredToDefinition, "RetVal", "double");
 validate(DistanceSquaredToDefinition);
@@ -214,7 +246,8 @@ validate(DistanceSquaredToDefinition);
 % C++ Signature: double Cell::DistanceSquaredFromCentre()
 DistanceSquaredFromCentreDefinition = addMethod(CellDefinition, ...
     "double Cell::DistanceSquaredFromCentre()", ...
-    "Description", "clib.Model.Cell.DistanceSquaredFromCentre    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "DistanceSquaredFromCentre", ...
+    "Description", "DistanceSquaredFromCentre    Method of C++ class Cell."); % Modify help description values as needed.
 defineOutput(DistanceSquaredFromCentreDefinition, "RetVal", "double");
 validate(DistanceSquaredFromCentreDefinition);
 
@@ -222,7 +255,8 @@ validate(DistanceSquaredFromCentreDefinition);
 % C++ Signature: bool Cell::Necrotic(double distanceToBoundary,Params * parameters)
 NecroticDefinition = addMethod(CellDefinition, ...
    "bool Cell::Necrotic(double distanceToBoundary,Params * parameters)", ...
-   "Description", "clib.Model.Cell.Necrotic    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "Necrotic", ...
+   "Description", "Necrotic    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(NecroticDefinition, "distanceToBoundary", "double");
 defineArgument(NecroticDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 defineOutput(NecroticDefinition, "RetVal", "logical");
@@ -232,7 +266,8 @@ validate(NecroticDefinition);
 % C++ Signature: bool Cell::TooYoung(Params * parameters)
 TooYoungDefinition = addMethod(CellDefinition, ...
    "bool Cell::TooYoung(Params * parameters)", ...
-   "Description", "clib.Model.Cell.TooYoung    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "TooYoung", ...
+   "Description", "TooYoung    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(TooYoungDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 defineOutput(TooYoungDefinition, "RetVal", "logical");
 validate(TooYoungDefinition);
@@ -241,7 +276,8 @@ validate(TooYoungDefinition);
 % C++ Signature: void Cell::LengthenSpring(Params * parameters)
 LengthenSpringDefinition = addMethod(CellDefinition, ...
    "void Cell::LengthenSpring(Params * parameters)", ...
-   "Description", "clib.Model.Cell.LengthenSpring    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "LengthenSpring", ...
+   "Description", "LengthenSpring    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(LengthenSpringDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 validate(LengthenSpringDefinition);
 
@@ -249,7 +285,8 @@ validate(LengthenSpringDefinition);
 % C++ Signature: bool Cell::DrugInducedDeath(Params * parameters,double * drugConcentration,int gridRadius)
 DrugInducedDeathDefinition = addMethod(CellDefinition, ...
    "bool Cell::DrugInducedDeath(Params * parameters,double * drugConcentration,int gridRadius)", ...
-   "Description", "clib.Model.Cell.DrugInducedDeath    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "DrugInducedDeath", ...
+   "Description", "DrugInducedDeath    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(DrugInducedDeathDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 defineArgument(DrugInducedDeathDefinition, "drugConcentration", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
 defineArgument(DrugInducedDeathDefinition, "gridRadius", "int32");
@@ -260,14 +297,16 @@ validate(DrugInducedDeathDefinition);
 % C++ Signature: void Cell::Die()
 DieDefinition = addMethod(CellDefinition, ...
     "void Cell::Die()", ...
-    "Description", "clib.Model.Cell.Die    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "Die", ...
+    "Description", "Die    Method of C++ class Cell."); % Modify help description values as needed.
 validate(DieDefinition);
 
 %% C++ class method |PossiblyPSCInfectNeighbour| for C++ class |Cell| 
 % C++ Signature: void Cell::PossiblyPSCInfectNeighbour(Params * parameters)
 PossiblyPSCInfectNeighbourDefinition = addMethod(CellDefinition, ...
    "void Cell::PossiblyPSCInfectNeighbour(Params * parameters)", ...
-   "Description", "clib.Model.Cell.PossiblyPSCInfectNeighbour    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "PossiblyPSCInfectNeighbour", ...
+   "Description", "PossiblyPSCInfectNeighbour    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(PossiblyPSCInfectNeighbourDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 validate(PossiblyPSCInfectNeighbourDefinition);
 
@@ -275,14 +314,24 @@ validate(PossiblyPSCInfectNeighbourDefinition);
 % C++ Signature: void Cell::Move()
 MoveDefinition = addMethod(CellDefinition, ...
     "void Cell::Move()", ...
-    "Description", "clib.Model.Cell.Move    Method of C++ class Cell."); % Modify help description values as needed.
+    "MATLABName", "Move", ...
+    "Description", "Move    Method of C++ class Cell."); % Modify help description values as needed.
 validate(MoveDefinition);
+
+%% C++ class method |Disintegrate| for C++ class |Cell| 
+% C++ Signature: void Cell::Disintegrate()
+DisintegrateDefinition = addMethod(CellDefinition, ...
+    "void Cell::Disintegrate()", ...
+    "MATLABName", "Disintegrate", ...
+    "Description", "Disintegrate    Method of C++ class Cell."); % Modify help description values as needed.
+validate(DisintegrateDefinition);
 
 %% C++ class method |Proliferate| for C++ class |Cell| 
 % C++ Signature: Cell * Cell::Proliferate(Params * parameters)
 ProliferateDefinition = addMethod(CellDefinition, ...
    "Cell * Cell::Proliferate(Params * parameters)", ...
-   "Description", "clib.Model.Cell.Proliferate    Method of C++ class Cell."); % Modify help description values as needed.
+   "MATLABName", "Proliferate", ...
+   "Description", "Proliferate    Method of C++ class Cell."); % Modify help description values as needed.
 defineArgument(ProliferateDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 defineOutput(ProliferateDefinition, "RetVal", "clib.Model.Cell", 1);
 validate(ProliferateDefinition);
@@ -305,7 +354,8 @@ PancreasDefinition = addClass(libDef, "Pancreas", "MATLABName", "clib.Model.Panc
 % C++ Signature: Pancreas * Pancreas::CreateNewParticle(Params * parameters)
 CreateNewParticleDefinition = addMethod(PancreasDefinition, ...
    "Pancreas * Pancreas::CreateNewParticle(Params * parameters)", ...
-   "Description", "clib.Model.Pancreas.CreateNewParticle    Method of C++ class Pancreas."); % Modify help description values as needed.
+   "MATLABName", "CreateNewParticle", ...
+   "Description", "CreateNewParticle    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(CreateNewParticleDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
 defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", 1);
 validate(CreateNewParticleDefinition);
@@ -314,7 +364,8 @@ validate(CreateNewParticleDefinition);
 % C++ Signature: void Pancreas::InjectDrug(int x,int y,double amount)
 InjectDrugDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::InjectDrug(int x,int y,double amount)", ...
-    "Description", "clib.Model.Pancreas.InjectDrug    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "InjectDrug", ...
+    "Description", "InjectDrug    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(InjectDrugDefinition, "x", "int32");
 defineArgument(InjectDrugDefinition, "y", "int32");
 defineArgument(InjectDrugDefinition, "amount", "double");
@@ -324,22 +375,75 @@ validate(InjectDrugDefinition);
 % C++ Signature: double * Pancreas::LoadCellsCoordinates()
 LoadCellsCoordinatesDefinition = addMethod(PancreasDefinition, ...
    "double * Pancreas::LoadCellsCoordinates()", ...
-   "Description", "clib.Model.Pancreas.LoadCellsCoordinates    Method of C++ class Pancreas."); % Modify help description values as needed.
+   "MATLABName", "LoadCellsCoordinates", ...
+   "Description", "LoadCellsCoordinates    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineOutput(LoadCellsCoordinatesDefinition, "RetVal", "double", 1);
 validate(LoadCellsCoordinatesDefinition);
+
+%% C++ class method |circumCentre42| for C++ class |Pancreas| 
+% C++ Signature: void Pancreas::circumCentre42(double a0,double a1,double b0,double b1,double c0,double c1,void(*vertex)(double, double))
+circumCentre42Definition = addMethod(PancreasDefinition, ...
+    "void Pancreas::circumCentre42(double a0,double a1,double b0,double b1,double c0,double c1,void(*vertex)(double, double))", ...
+    "MATLABName", "circumCentre42", ...
+    "Description", "circumCentre42    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(circumCentre42Definition, "a0", "double");
+defineArgument(circumCentre42Definition, "a1", "double");
+defineArgument(circumCentre42Definition, "b0", "double");
+defineArgument(circumCentre42Definition, "b1", "double");
+defineArgument(circumCentre42Definition, "c0", "double");
+defineArgument(circumCentre42Definition, "c1", "double");
+defineArgument(circumCentre42Definition, "vertex", "clib.type.Model.Function1");
+validate(circumCentre42Definition);
+
+%% C++ class method |circumCentre| for C++ class |Pancreas| 
+% C++ Signature: void Pancreas::circumCentre(double a0,double a1,double b0,double b1,double c0,double c1,void(*vertex)(double, double))
+circumCentreDefinition = addMethod(PancreasDefinition, ...
+    "void Pancreas::circumCentre(double a0,double a1,double b0,double b1,double c0,double c1,void(*vertex)(double, double))", ...
+    "MATLABName", "circumCentre", ...
+    "Description", "circumCentre    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(circumCentreDefinition, "a0", "double");
+defineArgument(circumCentreDefinition, "a1", "double");
+defineArgument(circumCentreDefinition, "b0", "double");
+defineArgument(circumCentreDefinition, "b1", "double");
+defineArgument(circumCentreDefinition, "c0", "double");
+defineArgument(circumCentreDefinition, "c1", "double");
+defineArgument(circumCentreDefinition, "vertex", "clib.type.Model.Function1");
+validate(circumCentreDefinition);
+
+%% C++ class method |EnumerateVoronoiCells| for C++ class |Pancreas| 
+% C++ Signature: void Pancreas::EnumerateVoronoiCells(void(*startCell)(CellType),void(*vertex)(double, double),void(*endCell)())
+EnumerateVoronoiCellsDefinition = addMethod(PancreasDefinition, ...
+    "void Pancreas::EnumerateVoronoiCells(void(*startCell)(CellType),void(*vertex)(double, double),void(*endCell)())", ...
+    "MATLABName", "EnumerateVoronoiCells", ...
+    "Description", "EnumerateVoronoiCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(EnumerateVoronoiCellsDefinition, "startCell", "clib.type.Model.Function2");
+defineArgument(EnumerateVoronoiCellsDefinition, "vertex", "clib.type.Model.Function1");
+defineArgument(EnumerateVoronoiCellsDefinition, "endCell", "clib.type.Model.Function3");
+validate(EnumerateVoronoiCellsDefinition);
+
+%% C++ class method |EnumerateNeighbours| for C++ class |Pancreas| 
+% C++ Signature: void Pancreas::EnumerateNeighbours(void(*line)(Cell *, Cell *))
+EnumerateNeighboursDefinition = addMethod(PancreasDefinition, ...
+    "void Pancreas::EnumerateNeighbours(void(*line)(Cell *, Cell *))", ...
+    "MATLABName", "EnumerateNeighbours", ...
+    "Description", "EnumerateNeighbours    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(EnumerateNeighboursDefinition, "line", "clib.type.Model.Function4");
+validate(EnumerateNeighboursDefinition);
 
 %% C++ class method |DetermineNeighbours| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::DetermineNeighbours()
 DetermineNeighboursDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::DetermineNeighbours()", ...
-    "Description", "clib.Model.Pancreas.DetermineNeighbours    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "DetermineNeighbours", ...
+    "Description", "DetermineNeighbours    Method of C++ class Pancreas."); % Modify help description values as needed.
 validate(DetermineNeighboursDefinition);
 
 %% C++ class method |HealthyCellsBeyondRadius| for C++ class |Pancreas| 
 % C++ Signature: bool Pancreas::HealthyCellsBeyondRadius(double radius)
 HealthyCellsBeyondRadiusDefinition = addMethod(PancreasDefinition, ...
     "bool Pancreas::HealthyCellsBeyondRadius(double radius)", ...
-    "Description", "clib.Model.Pancreas.HealthyCellsBeyondRadius    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "HealthyCellsBeyondRadius", ...
+    "Description", "HealthyCellsBeyondRadius    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(HealthyCellsBeyondRadiusDefinition, "radius", "double");
 defineOutput(HealthyCellsBeyondRadiusDefinition, "RetVal", "logical");
 validate(HealthyCellsBeyondRadiusDefinition);
@@ -348,7 +452,8 @@ validate(HealthyCellsBeyondRadiusDefinition);
 % C++ Signature: void Pancreas::AddNewCell(Cell * new_cell)
 AddNewCellDefinition = addMethod(PancreasDefinition, ...
    "void Pancreas::AddNewCell(Cell * new_cell)", ...
-   "Description", "clib.Model.Pancreas.AddNewCell    Method of C++ class Pancreas."); % Modify help description values as needed.
+   "MATLABName", "AddNewCell", ...
+   "Description", "AddNewCell    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(AddNewCellDefinition, "new_cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
 validate(AddNewCellDefinition);
 
@@ -356,7 +461,8 @@ validate(AddNewCellDefinition);
 % C++ Signature: void Pancreas::AddMoreTissue(double moving_rim,double max_tumour_radius)
 AddMoreTissueDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::AddMoreTissue(double moving_rim,double max_tumour_radius)", ...
-    "Description", "clib.Model.Pancreas.AddMoreTissue    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "AddMoreTissue", ...
+    "Description", "AddMoreTissue    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(AddMoreTissueDefinition, "moving_rim", "double");
 defineArgument(AddMoreTissueDefinition, "max_tumour_radius", "double");
 validate(AddMoreTissueDefinition);
@@ -365,21 +471,24 @@ validate(AddMoreTissueDefinition);
 % C++ Signature: void Pancreas::MoreTissueAddedIfNecessary()
 MoreTissueAddedIfNecessaryDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::MoreTissueAddedIfNecessary()", ...
-    "Description", "clib.Model.Pancreas.MoreTissueAddedIfNecessary    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "MoreTissueAddedIfNecessary", ...
+    "Description", "MoreTissueAddedIfNecessary    Method of C++ class Pancreas."); % Modify help description values as needed.
 validate(MoreTissueAddedIfNecessaryDefinition);
 
 %% C++ class method |DetermineBoundaryCells| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::DetermineBoundaryCells()
 DetermineBoundaryCellsDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::DetermineBoundaryCells()", ...
-    "Description", "clib.Model.Pancreas.DetermineBoundaryCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "DetermineBoundaryCells", ...
+    "Description", "DetermineBoundaryCells    Method of C++ class Pancreas."); % Modify help description values as needed.
 validate(DetermineBoundaryCellsDefinition);
 
 %% C++ class method |TumourRadius| for C++ class |Pancreas| 
 % C++ Signature: double Pancreas::TumourRadius()
 TumourRadiusDefinition = addMethod(PancreasDefinition, ...
     "double Pancreas::TumourRadius()", ...
-    "Description", "clib.Model.Pancreas.TumourRadius    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "TumourRadius", ...
+    "Description", "TumourRadius    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineOutput(TumourRadiusDefinition, "RetVal", "double");
 validate(TumourRadiusDefinition);
 
@@ -387,7 +496,8 @@ validate(TumourRadiusDefinition);
 % C++ Signature: double Pancreas::DistanceToLine(Cell * cell)
 DistanceToLineDefinition = addMethod(PancreasDefinition, ...
    "double Pancreas::DistanceToLine(Cell * cell)", ...
-   "Description", "clib.Model.Pancreas.DistanceToLine    Method of C++ class Pancreas."); % Modify help description values as needed.
+   "MATLABName", "DistanceToLine", ...
+   "Description", "DistanceToLine    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(DistanceToLineDefinition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
 defineOutput(DistanceToLineDefinition, "RetVal", "double");
 validate(DistanceToLineDefinition);
@@ -396,7 +506,8 @@ validate(DistanceToLineDefinition);
 % C++ Signature: double Pancreas::TumourVolume()
 TumourVolumeDefinition = addMethod(PancreasDefinition, ...
     "double Pancreas::TumourVolume()", ...
-    "Description", "clib.Model.Pancreas.TumourVolume    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "TumourVolume", ...
+    "Description", "TumourVolume    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineOutput(TumourVolumeDefinition, "RetVal", "double");
 validate(TumourVolumeDefinition);
 
@@ -404,7 +515,8 @@ validate(TumourVolumeDefinition);
 % C++ Signature: double Pancreas::getPscRatio()
 getPscRatioDefinition = addMethod(PancreasDefinition, ...
     "double Pancreas::getPscRatio()", ...
-    "Description", "clib.Model.Pancreas.getPscRatio    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "getPscRatio", ...
+    "Description", "getPscRatio    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineOutput(getPscRatioDefinition, "RetVal", "double");
 validate(getPscRatioDefinition);
 
@@ -412,21 +524,24 @@ validate(getPscRatioDefinition);
 % C++ Signature: void Pancreas::CreateInitialTumour()
 CreateInitialTumourDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::CreateInitialTumour()", ...
-    "Description", "clib.Model.Pancreas.CreateInitialTumour    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "CreateInitialTumour", ...
+    "Description", "CreateInitialTumour    Method of C++ class Pancreas."); % Modify help description values as needed.
 validate(CreateInitialTumourDefinition);
 
 %% C++ class method |SimulateOneHour| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::SimulateOneHour()
 SimulateOneHourDefinition = addMethod(PancreasDefinition, ...
     "void Pancreas::SimulateOneHour()", ...
-    "Description", "clib.Model.Pancreas.SimulateOneHour    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "SimulateOneHour", ...
+    "Description", "SimulateOneHour    Method of C++ class Pancreas."); % Modify help description values as needed.
 validate(SimulateOneHourDefinition);
 
 %% C++ class method |SimulateOneDay| for C++ class |Pancreas| 
 % C++ Signature: double Pancreas::SimulateOneDay(int day)
 SimulateOneDayDefinition = addMethod(PancreasDefinition, ...
     "double Pancreas::SimulateOneDay(int day)", ...
-    "Description", "clib.Model.Pancreas.SimulateOneDay    Method of C++ class Pancreas."); % Modify help description values as needed.
+    "MATLABName", "SimulateOneDay", ...
+    "Description", "SimulateOneDay    Method of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(SimulateOneDayDefinition, "day", "int32");
 defineOutput(SimulateOneDayDefinition, "RetVal", "double");
 validate(SimulateOneDayDefinition);
@@ -435,7 +550,7 @@ validate(SimulateOneDayDefinition);
 % C++ Signature: Pancreas::Pancreas(Pancreas const & input1)
 PancreasConstructor1Definition = addConstructor(PancreasDefinition, ...
     "Pancreas::Pancreas(Pancreas const & input1)", ...
-    "Description", "clib.Model.Pancreas.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
+    "Description", "clib.Model.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
 defineArgument(PancreasConstructor1Definition, "input1", "clib.Model.Pancreas", "input");
 validate(PancreasConstructor1Definition);
 
@@ -445,9 +560,9 @@ addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", 
     "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ function |SeedAndGrowToStartVolume| with MATLAB name |clib.Model.SeedAndGrowToStartVolume|
-% C++ Signature: Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double startVolume)
+% C++ Signature: Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume)
 SeedAndGrowToStartVolumeDefinition = addFunction(libDef, ...
-   "Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double startVolume)", ...
+   "Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume)", ...
    "MATLABName", "clib.Model.SeedAndGrowToStartVolume", ...
    "Description", "clib.Model.SeedAndGrowToStartVolume    Representation of C++ function SeedAndGrowToStartVolume."); % Modify help description values as needed.
 defineArgument(SeedAndGrowToStartVolumeDefinition, "p0", "double");
@@ -455,14 +570,15 @@ defineArgument(SeedAndGrowToStartVolumeDefinition, "psc", "double");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "dmax", "int32");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "gage", "int32");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "page", "int32");
+defineArgument(SeedAndGrowToStartVolumeDefinition, "EC50", "double");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "startVolume", "double");
 defineOutput(SeedAndGrowToStartVolumeDefinition, "RetVal", "clib.Model.Pancreas", 1);
 validate(SeedAndGrowToStartVolumeDefinition);
 
 %% C++ function |SimulateWholeExperiment| with MATLAB name |clib.Model.SimulateWholeExperiment|
-% C++ Signature: void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,double [] volumes)
+% C++ Signature: void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)
 SimulateWholeExperimentDefinition = addFunction(libDef, ...
-   "void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,double [] volumes)", ...
+   "void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)", ...
    "MATLABName", "clib.Model.SimulateWholeExperiment", ...
    "Description", "clib.Model.SimulateWholeExperiment    Representation of C++ function SimulateWholeExperiment."); % Modify help description values as needed.
 defineArgument(SimulateWholeExperimentDefinition, "p0", "double");
@@ -470,15 +586,16 @@ defineArgument(SimulateWholeExperimentDefinition, "psc", "double");
 defineArgument(SimulateWholeExperimentDefinition, "dmax", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "gage", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "page", "int32");
+defineArgument(SimulateWholeExperimentDefinition, "EC50", "double");
 defineArgument(SimulateWholeExperimentDefinition, "startVolume", "double");
 defineArgument(SimulateWholeExperimentDefinition, "timeSteps", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "volumes", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
 validate(SimulateWholeExperimentDefinition);
 
 %% C++ function |PerformMultipleRuns| with MATLAB name |clib.Model.PerformMultipleRuns|
-% C++ Signature: void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,int iterations,double [] volumes)
+% C++ Signature: void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)
 PerformMultipleRunsDefinition = addFunction(libDef, ...
-   "void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
+   "void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
    "MATLABName", "clib.Model.PerformMultipleRuns", ...
    "Description", "clib.Model.PerformMultipleRuns    Representation of C++ function PerformMultipleRuns."); % Modify help description values as needed.
 defineArgument(PerformMultipleRunsDefinition, "p0", "double");
@@ -486,6 +603,7 @@ defineArgument(PerformMultipleRunsDefinition, "psc", "double");
 defineArgument(PerformMultipleRunsDefinition, "dmax", "int32");
 defineArgument(PerformMultipleRunsDefinition, "gage", "int32");
 defineArgument(PerformMultipleRunsDefinition, "page", "int32");
+defineArgument(PerformMultipleRunsDefinition, "EC50", "double");
 defineArgument(PerformMultipleRunsDefinition, "startVolume", "double");
 defineArgument(PerformMultipleRunsDefinition, "timeSteps", "int32");
 defineArgument(PerformMultipleRunsDefinition, "iterations", "int32");
@@ -493,9 +611,9 @@ defineArgument(PerformMultipleRunsDefinition, "volumes", "clib.array.Model.Doubl
 validate(PerformMultipleRunsDefinition);
 
 %% C++ function |CreateNewParticle| with MATLAB name |clib.Model.CreateNewParticle|
-% C++ Signature: Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,Pancreas * pancreas)
+% C++ Signature: Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,double EC50,Pancreas * pancreas)
 CreateNewParticleDefinition = addFunction(libDef, ...
-   "Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,Pancreas * pancreas)", ...
+   "Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,double EC50,Pancreas * pancreas)", ...
    "MATLABName", "clib.Model.CreateNewParticle", ...
    "Description", "clib.Model.CreateNewParticle    Representation of C++ function CreateNewParticle."); % Modify help description values as needed.
 defineArgument(CreateNewParticleDefinition, "p0", "double");
@@ -503,6 +621,7 @@ defineArgument(CreateNewParticleDefinition, "psc", "double");
 defineArgument(CreateNewParticleDefinition, "dmax", "int32");
 defineArgument(CreateNewParticleDefinition, "gage", "int32");
 defineArgument(CreateNewParticleDefinition, "page", "int32");
+defineArgument(CreateNewParticleDefinition, "EC50", "double");
 defineArgument(CreateNewParticleDefinition, "pancreas", "clib.Model.Pancreas", "input", 1); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
 defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", 1);
 validate(CreateNewParticleDefinition);

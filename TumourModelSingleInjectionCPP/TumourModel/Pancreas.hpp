@@ -202,8 +202,15 @@ public:
 			{
 				Cell* P = cells[TRI.triangles[e]];
 				Cell* Q = cells[TRI.triangles[nextHalfedge(e)]];
-				P->Neighbours.push_back(Q);
-				Q->Neighbours.push_back(P);
+				
+				if (P->currentState.type != CellType::Empty && Q->currentState.type != CellType::Empty)
+				{
+					P->Neighbours.push_back(Q);
+					Q->Neighbours.push_back(P);
+				}
+
+				//P->Neighbours.push_back(Q);
+				//Q->Neighbours.push_back(P);
 			}
 	}
 
@@ -392,8 +399,8 @@ public:
 				cell->Move();
 			else if (cell->currentState.type == CellType::Dead)
 				cell->Move();
-				//cell->Disintegrate(); Need to add a function that slowly disintegrates dead cell and turns it into empty cell
-			else
+				//cell->Disintegrate(); //Need to add a function that slowly disintegrates dead cell and turns it into empty cell
+			else if (cell->currentState.type != CellType::Empty)
 			{
 				if (cell->DrugInducedDeath(parameters, drugConcentration, gridRadius))
 					cell->Die();

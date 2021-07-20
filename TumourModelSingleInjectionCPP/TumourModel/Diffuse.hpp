@@ -26,8 +26,11 @@ double eps(double t)
 #define y_mat(i, j) y[(i)*grid_size+(j)]
 #define dy(i, j)    dydt[(i)*grid_size+(j)]
 
-double delta = 0.01;
-double clearance = 0.02;
+//double delta = 0.001;
+//double clearance = 1e-5; // Not estimated
+
+double delta = Params::delta;
+double clearance = Params::clearance;
 
 void odeFcn_main(int grid_size, double* y, double* dydt)
 {

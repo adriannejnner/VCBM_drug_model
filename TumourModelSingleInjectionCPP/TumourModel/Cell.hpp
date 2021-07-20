@@ -9,7 +9,7 @@
 
 using namespace::std;
 
-enum class CellType { Cancer = 1, Dead = 3, Healthy = 4, PSC = 5 };
+enum class CellType { Cancer = 1, Dead = 3, Healthy = 4, PSC = 5, Empty = 6 };
 
 class Cell;
 
@@ -147,7 +147,7 @@ public:
 		int nearestX = round(currentState.X) + gridRadius;
 		int nearestY = round(currentState.Y) + gridRadius;
 		double concentration = drugConcentration[nearestY * (gridRadius*2+1) + nearestX];
-		return concentration > 0 && parameters->WithProbability(concentration / (concentration + 1)); // we need to make this a parameter we set instead of being just 1
+		return concentration > 0 && parameters->WithProbability(concentration / (concentration + parameters->EC50)); // we need to make this a parameter we set instead of being just 1
 	}
 
 	void Die()
@@ -193,10 +193,17 @@ public:
 		newState.Y = currentState.Y + Fy * Params::Delta_t;
 	}
 	
-	//void Disintegrate()
-	//{
-		
-	//}
+	void Disintegrate()
+	{
+		if (currentState.age > 3) // Cell has finished dying, make empty cell     
+		{
+			newState.type = CellType::Empty;
+		}
+		else 
+		{			
+			newState.spring_length = currentState.spring_length/8;// shorten spring length
+		}
+	}
 
 	Cell* PossiblyPoliferate(vector<Cell*> &boundaryCells, Params* parameters)
 	{
