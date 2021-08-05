@@ -12,20 +12,21 @@ EC50 = 0.01;
 p0 = 0.2;
 
 tumour_volume_initial = 201; %this is the size of the tumour we want to grow before we simulate treatment (or in this case no treatment)
-p = clib.Model.SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
+p = clib.Model.SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, EC50, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
 
 % initialise drug injection location and concentration
 xinj1 = 0;
 yinj1 = 0;
-C0 = 2000*50; 
+C0 = 50; 
 
 for jj = 1:250 % does 250 different simulations of tumour growth
     
-  p = clib.Model.SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
+    psim = clib.Model.CreateNewParticle(p0, psc, dmax, gage, page, EC50, p); %sets the initial tumour size for the simulation as the size of the tumour "p", i.e. tumour_volume_initial
+    psim.InjectFibre(10, 10, 2000*526.3875/(11))
     
     for ii = 1:33 %simulates 33 days of tumour growth one day at a time - if possible can you also simulate for 50 and 100 days so we can see the difference between the three
         
-        Tvol(ii) = p.SimulateOneDay(1); %simulates the growth of the tumour for one day and returns its volume
+        Tvol(ii) = psim.SimulateOneDay(1); %simulates the growth of the tumour for one day and returns its volume
 
     end
     

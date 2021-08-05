@@ -153,7 +153,7 @@ public:
 
 		double concentration = drugConcentration[nearestY * (gridRadius*2+1) + nearestX];
 		if (concentration > 0)
-			return parameters->WithProbability(concentration / (concentration + 20));
+			return parameters->WithProbability(concentration / (concentration + parameters->EC50));
 		else
 			return false;
 	}

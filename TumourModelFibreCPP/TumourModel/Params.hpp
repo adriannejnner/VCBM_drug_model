@@ -14,15 +14,16 @@ public:
     //int created, opportunities;
 
     int gage, page;
-    double p_0, dmax, p_psc;
+    double p_0, dmax, p_psc, EC50;
 
-    Params(double p_0, double p_psc, double dmax, int gage, int page)
+    Params(double p_0, double p_psc, double dmax, int gage, int page, double EC50)
     {
         this->p_0 = p_0;
         this->p_psc = p_psc;
         this->dmax = dmax;
         this->gage = gage;
         this->page = page;
+		this->EC50 = EC50;
     }
 
     double RandomDouble()

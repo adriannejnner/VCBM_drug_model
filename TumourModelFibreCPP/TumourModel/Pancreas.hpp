@@ -51,7 +51,7 @@ public:
 		return new Pancreas(cells, parameters);
 	}
 
-#define gridRadius	60
+#define gridRadius	70
 #define gridWidth	(gridRadius*2+1)
 
 	void InjectPoint(int x, int y, double amount)

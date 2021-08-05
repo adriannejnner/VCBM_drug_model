@@ -1,8 +1,8 @@
 #include "Model.h"
 
-Pancreas* SeedAndGrowToStartVolume(double p0, double psc, int dmax, int gage, int page, double startVolume)//, void(*render)(int, int, Pancreas*, int))
+Pancreas* SeedAndGrowToStartVolume(double p0, double psc, int dmax, int gage, int page, double EC50, double startVolume)//, void(*render)(int, int, Pancreas*, int))
 {
-	Params* parameters = new Params(p0, psc, dmax, gage, page);
+	Params* parameters = new Params(p0, psc, dmax, gage, page, EC50);
 	vector<Cell*> empty;
 	Pancreas* pancreas = new Pancreas(empty, parameters);
 	// start with just one infected cancer cell nearest to (0, 0)
@@ -18,9 +18,9 @@ Pancreas* SeedAndGrowToStartVolume(double p0, double psc, int dmax, int gage, in
 	return pancreas;
 }
 
-void SimulateWholeExperiment(double p0, double psc, int dmax, int gage, int page, double startVolume, int timeSteps, double volumes[])//, void(*render)(int, int, Pancreas*, int))
+void SimulateWholeExperiment(double p0, double psc, int dmax, int gage, int page, double EC50, double startVolume, int timeSteps, double volumes[])//, void(*render)(int, int, Pancreas*, int))
 {
-	Pancreas* pancreas = SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, startVolume);//, render
+	Pancreas* pancreas = SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, EC50, startVolume);//, render
 
 	volumes[0] = pancreas->TumourVolume();
 
@@ -43,7 +43,7 @@ void SimulateWholeExperiment(double p0, double psc, int dmax, int gage, int page
 	delete pancreas;
 }
 
-void PerformMultipleRuns(double p0, double psc, int dmax, int gage, int page, double startVolume, int timeSteps, int iterations, double volumes[])//, void(*render)(int, int, Pancreas*, int))
+void PerformMultipleRuns(double p0, double psc, int dmax, int gage, int page, double EC50, double startVolume, int timeSteps, int iterations, double volumes[])//, void(*render)(int, int, Pancreas*, int))
 {
 	for (int j = 0; j < timeSteps; j++)
 		volumes[j] = 0;
@@ -51,7 +51,7 @@ void PerformMultipleRuns(double p0, double psc, int dmax, int gage, int page, do
 	for (int i = 0; i < iterations; i++)
 	{
 		double* v = new double[timeSteps];
-		SimulateWholeExperiment(p0, psc, dmax, gage, page, startVolume, timeSteps, v); //, render
+		SimulateWholeExperiment(p0, psc, dmax, gage, page, EC50, startVolume, timeSteps, v); //, render
 		for (int j = 0; j < timeSteps; j++)
 			volumes[j] += v[j];
 
@@ -60,4 +60,9 @@ void PerformMultipleRuns(double p0, double psc, int dmax, int gage, int page, do
 
 	for (int j = 0; j < timeSteps; j++)
 		volumes[j] /= iterations;
+}
+
+Pancreas* CreateNewParticle(double p0, double psc, int dmax, int gage, int page, double EC50, Pancreas* pancreas)
+{
+	return pancreas->CreateNewParticle(new Params(p0, psc, dmax, gage, page, EC50));
 }

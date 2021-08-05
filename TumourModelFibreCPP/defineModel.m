@@ -80,15 +80,16 @@ ParamsDefinition = addClass(libDef, "Params", "MATLABName", "clib.Model.Params",
     "Description", "clib.Model.Params    Representation of C++ class Params."); % Modify help description values as needed.
 
 %% C++ class constructor for C++ class |Params| 
-% C++ Signature: Params::Params(double p_0,double p_psc,double dmax,int gage,int page)
+% C++ Signature: Params::Params(double p_0,double p_psc,double dmax,int gage,int page,double EC50)
 ParamsConstructor1Definition = addConstructor(ParamsDefinition, ...
-    "Params::Params(double p_0,double p_psc,double dmax,int gage,int page)", ...
+    "Params::Params(double p_0,double p_psc,double dmax,int gage,int page,double EC50)", ...
     "Description", "clib.Model.Params.Params    Constructor of C++ class Params."); % Modify help description values as needed.
 defineArgument(ParamsConstructor1Definition, "p_0", "double");
 defineArgument(ParamsConstructor1Definition, "p_psc", "double");
 defineArgument(ParamsConstructor1Definition, "dmax", "double");
 defineArgument(ParamsConstructor1Definition, "gage", "int32");
 defineArgument(ParamsConstructor1Definition, "page", "int32");
+defineArgument(ParamsConstructor1Definition, "EC50", "double");
 validate(ParamsConstructor1Definition);
 
 %% C++ class method |RandomDouble| for C++ class |Params| 
@@ -131,6 +132,11 @@ addProperty(ParamsDefinition, "dmax", "double", ...
 %% C++ class public data member |p_psc| for C++ class |Params| 
 % C++ Signature: double Params::p_psc
 addProperty(ParamsDefinition, "p_psc", "double", ...
+    "Description", "double    Data member of C++ class Params."); % Modify help description values as needed.
+
+%% C++ class public data member |EC50| for C++ class |Params| 
+% C++ Signature: double Params::EC50
+addProperty(ParamsDefinition, "EC50", "double", ...
     "Description", "double    Data member of C++ class Params."); % Modify help description values as needed.
 
 %% C++ class |Cell| with MATLAB name |clib.Model.Cell| 
@@ -473,8 +479,8 @@ addProperty(PancreasDefinition, "injected", "logical", ...
     "Description", "logical    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ class public data member |drugConcentration| for C++ class |Pancreas| 
-% C++ Signature: double [14651] Pancreas::drugConcentration
-addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [14651], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
+% C++ Signature: double [19891] Pancreas::drugConcentration
+addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [19891], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
     "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ class public data member |fibreConcentration| for C++ class |Pancreas| 
@@ -483,9 +489,9 @@ addProperty(PancreasDefinition, "fibreConcentration", "clib.array.Model.Double",
    "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ function |SeedAndGrowToStartVolume| with MATLAB name |clib.Model.SeedAndGrowToStartVolume|
-% C++ Signature: Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double startVolume)
+% C++ Signature: Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume)
 SeedAndGrowToStartVolumeDefinition = addFunction(libDef, ...
-   "Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double startVolume)", ...
+   "Pancreas * SeedAndGrowToStartVolume(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume)", ...
    "MATLABName", "clib.Model.SeedAndGrowToStartVolume", ...
    "Description", "clib.Model.SeedAndGrowToStartVolume    Representation of C++ function SeedAndGrowToStartVolume."); % Modify help description values as needed.
 defineArgument(SeedAndGrowToStartVolumeDefinition, "p0", "double");
@@ -493,14 +499,15 @@ defineArgument(SeedAndGrowToStartVolumeDefinition, "psc", "double");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "dmax", "int32");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "gage", "int32");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "page", "int32");
+defineArgument(SeedAndGrowToStartVolumeDefinition, "EC50", "double");
 defineArgument(SeedAndGrowToStartVolumeDefinition, "startVolume", "double");
 defineOutput(SeedAndGrowToStartVolumeDefinition, "RetVal", "clib.Model.Pancreas", 1);
 validate(SeedAndGrowToStartVolumeDefinition);
 
 %% C++ function |SimulateWholeExperiment| with MATLAB name |clib.Model.SimulateWholeExperiment|
-% C++ Signature: void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,double [] volumes)
+% C++ Signature: void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)
 SimulateWholeExperimentDefinition = addFunction(libDef, ...
-   "void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,double [] volumes)", ...
+   "void SimulateWholeExperiment(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)", ...
    "MATLABName", "clib.Model.SimulateWholeExperiment", ...
    "Description", "clib.Model.SimulateWholeExperiment    Representation of C++ function SimulateWholeExperiment."); % Modify help description values as needed.
 defineArgument(SimulateWholeExperimentDefinition, "p0", "double");
@@ -508,15 +515,16 @@ defineArgument(SimulateWholeExperimentDefinition, "psc", "double");
 defineArgument(SimulateWholeExperimentDefinition, "dmax", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "gage", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "page", "int32");
+defineArgument(SimulateWholeExperimentDefinition, "EC50", "double");
 defineArgument(SimulateWholeExperimentDefinition, "startVolume", "double");
 defineArgument(SimulateWholeExperimentDefinition, "timeSteps", "int32");
 defineArgument(SimulateWholeExperimentDefinition, "volumes", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
 validate(SimulateWholeExperimentDefinition);
 
 %% C++ function |PerformMultipleRuns| with MATLAB name |clib.Model.PerformMultipleRuns|
-% C++ Signature: void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,int iterations,double [] volumes)
+% C++ Signature: void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)
 PerformMultipleRunsDefinition = addFunction(libDef, ...
-   "void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
+   "void PerformMultipleRuns(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
    "MATLABName", "clib.Model.PerformMultipleRuns", ...
    "Description", "clib.Model.PerformMultipleRuns    Representation of C++ function PerformMultipleRuns."); % Modify help description values as needed.
 defineArgument(PerformMultipleRunsDefinition, "p0", "double");
@@ -524,11 +532,28 @@ defineArgument(PerformMultipleRunsDefinition, "psc", "double");
 defineArgument(PerformMultipleRunsDefinition, "dmax", "int32");
 defineArgument(PerformMultipleRunsDefinition, "gage", "int32");
 defineArgument(PerformMultipleRunsDefinition, "page", "int32");
+defineArgument(PerformMultipleRunsDefinition, "EC50", "double");
 defineArgument(PerformMultipleRunsDefinition, "startVolume", "double");
 defineArgument(PerformMultipleRunsDefinition, "timeSteps", "int32");
 defineArgument(PerformMultipleRunsDefinition, "iterations", "int32");
 defineArgument(PerformMultipleRunsDefinition, "volumes", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
 validate(PerformMultipleRunsDefinition);
+
+%% C++ function |CreateNewParticle| with MATLAB name |clib.Model.CreateNewParticle|
+% C++ Signature: Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,double EC50,Pancreas * pancreas)
+CreateNewParticleDefinition = addFunction(libDef, ...
+   "Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,double EC50,Pancreas * pancreas)", ...
+   "MATLABName", "clib.Model.CreateNewParticle", ...
+   "Description", "clib.Model.CreateNewParticle    Representation of C++ function CreateNewParticle."); % Modify help description values as needed.
+defineArgument(CreateNewParticleDefinition, "p0", "double");
+defineArgument(CreateNewParticleDefinition, "psc", "double");
+defineArgument(CreateNewParticleDefinition, "dmax", "int32");
+defineArgument(CreateNewParticleDefinition, "gage", "int32");
+defineArgument(CreateNewParticleDefinition, "page", "int32");
+defineArgument(CreateNewParticleDefinition, "EC50", "double");
+defineArgument(CreateNewParticleDefinition, "pancreas", "clib.Model.Pancreas", "input", 1); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
+defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", 1);
+validate(CreateNewParticleDefinition);
 
 %% Validate the library definition
 validate(libDef);
