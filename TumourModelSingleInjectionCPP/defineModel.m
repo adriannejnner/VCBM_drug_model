@@ -11,7 +11,7 @@
 function libDef = defineModel()
 libDef = clibgen.LibraryDefinition("ModelData.xml");
 %% OutputFolder and Libraries 
-libDef.OutputFolder = "C:\Users\adria\GBM_oHSV1_app\GBM_oHSV1_app\VCBM_drug_model\TumourModelSingleInjectionCPP";
+libDef.OutputFolder = "C:\Users\adria\OneDrive\Documents\Postdoc 2021\Polymer\Izzy\TroubleShootIzzysCode\TumourModelSingleInjectionCPP";
 libDef.Libraries = "";
 
 %% C++ function type |void(*)(double, double)| with MATLAB name |clib.type.Model.Function1| 
@@ -555,8 +555,8 @@ defineArgument(PancreasConstructor1Definition, "input1", "clib.Model.Pancreas", 
 validate(PancreasConstructor1Definition);
 
 %% C++ class public data member |drugConcentration| for C++ class |Pancreas| 
-% C++ Signature: double [14641] Pancreas::drugConcentration
-addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [14641], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
+% C++ Signature: double [25921] Pancreas::drugConcentration
+addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [25921], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
     "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ function |SeedAndGrowToStartVolume| with MATLAB name |clib.Model.SeedAndGrowToStartVolume|
