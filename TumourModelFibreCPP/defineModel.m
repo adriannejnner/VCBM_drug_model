@@ -62,8 +62,8 @@ addProperty(CellStateDefinition, "spring_length", "double", ...
 
 %% C++ class public data member |sibling| for C++ class |CellState| 
 % C++ Signature: Cell * CellState::sibling
-%addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%    "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
+addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+   "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
 
 %% C++ class public data member |X| for C++ class |CellState| 
 % C++ Signature: double CellState::X
@@ -487,13 +487,21 @@ ReturnTotalNumberHealthyCellsDefinition = addMethod(PancreasDefinition, ...
 defineOutput(ReturnTotalNumberHealthyCellsDefinition, "RetVal", "double");
 validate(ReturnTotalNumberHealthyCellsDefinition);
 
-%% C++ class method |ReturnDrugConcentration| for C++ class |Pancreas| 
-% C++ Signature: double Pancreas::ReturnDrugConcentration()
-ReturnDrugConcentrationDefinition = addMethod(PancreasDefinition, ...
-    "double Pancreas::ReturnDrugConcentration()", ...
-    "Description", "clib.Model.Pancreas.ReturnDrugConcentration    Method of C++ class Pancreas."); % Modify help description values as needed.
-defineOutput(ReturnDrugConcentrationDefinition, "RetVal", "double");
-validate(ReturnDrugConcentrationDefinition);
+%% C++ class method |ReturnDrugConcentrationDomain| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnDrugConcentrationDomain()
+ReturnDrugConcentrationDomainDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnDrugConcentrationDomain()", ...
+    "Description", "clib.Model.Pancreas.ReturnDrugConcentrationDomain    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnDrugConcentrationDomainDefinition, "RetVal", "double");
+validate(ReturnDrugConcentrationDomainDefinition);
+
+%% C++ class method |ReturnDrugConcentrationinFibre| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnDrugConcentrationinFibre()
+ReturnDrugConcentrationinFibreDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnDrugConcentrationinFibre()", ...
+    "Description", "clib.Model.Pancreas.ReturnDrugConcentrationinFibre    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnDrugConcentrationinFibreDefinition, "RetVal", "double");
+validate(ReturnDrugConcentrationinFibreDefinition);
 
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Pancreas const & input1)

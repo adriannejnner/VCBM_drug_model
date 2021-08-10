@@ -27,7 +27,7 @@ double eps(double t)
 #define dy(i, j)    dydt[(j)*grid_size+(i)]
 
 double delta = 0.01;
-double clearance = 0.02;
+double clearance = 2;
 
 void odeFcn_main(double t, int grid_size, double* y, double* dydt, int fibreX, int fibreY)
 {

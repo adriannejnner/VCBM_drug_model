@@ -448,7 +448,7 @@ public:
 	double SimulateOneDay(int day)//, void (*render)(int, int, Pancreas*, int))
 	{
 		DetermineNeighbours();
-
+		
 		for (int hour = 1; hour <= Params::tinterval; hour++)
 		{
 			SimulateOneHour();
@@ -513,17 +513,27 @@ public:
 		return num_of_Healthy_cells;
 	}
 	
-	double ReturnDrugConcentration()
+	double ReturnDrugConcentrationDomain()
 	{
 		double drug_conc_total = 0;
 		
-		for(int ii = 0; ii <=281; ii++)
+		for(int ii = 0; ii <=78961; ii++)
 		{
 			drug_conc_total += drugConcentration[ii];
-			
 		}
 		return drug_conc_total;
 		
 	}
 	
+	double ReturnDrugConcentrationinFibre()
+	{
+		double drug_conc_fibre_total = 0;
+		
+		for(int ii = 0; ii <=Params::N; ii++)
+		{
+			drug_conc_fibre_total += drugConcentration[78961+ii];
+		}
+		return drug_conc_fibre_total;
+		
+	}
 };
