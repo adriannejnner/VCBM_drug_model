@@ -47,6 +47,7 @@ void odeFcn_main(double t, int grid_size, double* y, double* dydt, int fibreX, i
 
     // evaluating fibre release
     double d = Params::k / (t / 10 + 1) + Params::d_const; // release rate - NOTE depends on t explicitly
+	//double d = drug_release_rate(t);
 
     double* F_vec = y + grid_size*grid_size; // extract the interior fibre concentrations from the vector yand convert to vec
 
@@ -69,7 +70,12 @@ void odeFcn_main(double t, int grid_size, double* y, double* dydt, int fibreX, i
     for (int i = 0; i < Params::L; i++)
         dy(grid_radius + fibreX + i, grid_radius + fibreY) += dF[Params::N - 1];
 }
-
+/*
+double drug_release_rate(double t)
+{
+	double d = Params::k / (t / 10 + 1) + Params::d_const;
+	return d;
+}*/
 
 double a2 = 1.0 / 5;
 double a3 = 3.0 / 10;

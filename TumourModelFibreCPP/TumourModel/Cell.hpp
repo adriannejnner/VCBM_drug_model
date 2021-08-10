@@ -231,7 +231,29 @@ public:
 		newState.X = currentState.X + scale * cos(M_PI + theta);
 		newState.Y = currentState.Y + scale * sin(M_PI + theta);
 		newState.spring_length = Params::s / parameters->page;
-		newState.age = 1;
+		
+		double age_prob = parameters->RandomDouble();
+		if(age_prob<0.1)
+		{newState.age = 1;}
+		else if(age_prob<0.2)
+		{newState.age = 2;}
+		else if(age_prob<0.3)
+		{newState.age = 3;}
+		else if(age_prob<0.4)
+		{newState.age = 4;}
+		else if(age_prob<0.5)
+		{newState.age = 5;}
+		else if(age_prob<0.6)
+		{newState.age = 6;}
+		else if(age_prob<0.7)
+		{newState.age = 7;}
+		else if(age_prob<0.8)
+		{newState.age = 8;}
+		else if(age_prob<0.9)
+		{newState.age = 9;}
+		else 
+		{newState.age = 10;}
+			
 		return newState.sibling;
 	}
 };

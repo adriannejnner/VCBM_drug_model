@@ -62,8 +62,8 @@ addProperty(CellStateDefinition, "spring_length", "double", ...
 
 %% C++ class public data member |sibling| for C++ class |CellState| 
 % C++ Signature: Cell * CellState::sibling
-addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-   "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
+%addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+%    "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
 
 %% C++ class public data member |X| for C++ class |CellState| 
 % C++ Signature: double CellState::X
@@ -455,6 +455,46 @@ defineArgument(SimulateOneDayDefinition, "day", "int32");
 defineOutput(SimulateOneDayDefinition, "RetVal", "double");
 validate(SimulateOneDayDefinition);
 
+%% C++ class method |ReturnTotalNumberTumourCells| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnTotalNumberTumourCells()
+ReturnTotalNumberTumourCellsDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnTotalNumberTumourCells()", ...
+    "Description", "clib.Model.Pancreas.ReturnTotalNumberTumourCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnTotalNumberTumourCellsDefinition, "RetVal", "double");
+validate(ReturnTotalNumberTumourCellsDefinition);
+
+%% C++ class method |ReturnTotalNumberDeadCells| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnTotalNumberDeadCells()
+ReturnTotalNumberDeadCellsDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnTotalNumberDeadCells()", ...
+    "Description", "clib.Model.Pancreas.ReturnTotalNumberDeadCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnTotalNumberDeadCellsDefinition, "RetVal", "double");
+validate(ReturnTotalNumberDeadCellsDefinition);
+
+%% C++ class method |ReturnTotalNumberPSCCells| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnTotalNumberPSCCells()
+ReturnTotalNumberPSCCellsDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnTotalNumberPSCCells()", ...
+    "Description", "clib.Model.Pancreas.ReturnTotalNumberPSCCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnTotalNumberPSCCellsDefinition, "RetVal", "double");
+validate(ReturnTotalNumberPSCCellsDefinition);
+
+%% C++ class method |ReturnTotalNumberHealthyCells| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnTotalNumberHealthyCells()
+ReturnTotalNumberHealthyCellsDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnTotalNumberHealthyCells()", ...
+    "Description", "clib.Model.Pancreas.ReturnTotalNumberHealthyCells    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnTotalNumberHealthyCellsDefinition, "RetVal", "double");
+validate(ReturnTotalNumberHealthyCellsDefinition);
+
+%% C++ class method |ReturnDrugConcentration| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnDrugConcentration()
+ReturnDrugConcentrationDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnDrugConcentration()", ...
+    "Description", "clib.Model.Pancreas.ReturnDrugConcentration    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnDrugConcentrationDefinition, "RetVal", "double");
+validate(ReturnDrugConcentrationDefinition);
+
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Pancreas const & input1)
 PancreasConstructor1Definition = addConstructor(PancreasDefinition, ...
@@ -479,8 +519,8 @@ addProperty(PancreasDefinition, "injected", "logical", ...
     "Description", "logical    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ class public data member |drugConcentration| for C++ class |Pancreas| 
-% C++ Signature: double [19891] Pancreas::drugConcentration
-addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [19891], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
+% C++ Signature: double [78971] Pancreas::drugConcentration
+addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", [78971], ... % '<MLTYPE>' can be clib.array.Model.Double, or double
     "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ class public data member |fibreConcentration| for C++ class |Pancreas| 

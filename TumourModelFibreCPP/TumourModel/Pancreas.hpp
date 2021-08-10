@@ -51,7 +51,7 @@ public:
 		return new Pancreas(cells, parameters);
 	}
 
-#define gridRadius	70
+#define gridRadius	140
 #define gridWidth	(gridRadius*2+1)
 
 	void InjectPoint(int x, int y, double amount)
@@ -456,4 +456,74 @@ public:
 		}
 		return TumourVolume();
 	}
+	
+	double ReturnTotalNumberTumourCells()
+	{
+		int num_of_cancer_cells = 0;
+		
+		for (Cell* cell : cells)
+		{
+			if (cell->currentState.type == CellType::Cancer)
+				num_of_cancer_cells++;
+			
+		}
+		
+		return num_of_cancer_cells;
+	}
+	
+	double ReturnTotalNumberDeadCells()
+	{
+		int num_of_dead_cells = 0;
+		
+		for (Cell* cell : cells)
+		{
+			if (cell->currentState.type == CellType::Dead)
+				num_of_dead_cells++;
+			
+		}
+		
+		return num_of_dead_cells;
+	}
+	
+	double ReturnTotalNumberPSCCells()
+	{
+		int num_of_PSC_cells = 0;
+		
+		for (Cell* cell : cells)
+		{
+			if (cell->currentState.type == CellType::PSC)
+				num_of_PSC_cells++;
+			
+		}
+		
+		return num_of_PSC_cells;
+	}
+	
+	double ReturnTotalNumberHealthyCells()
+	{
+		int num_of_Healthy_cells = 0;
+		
+		for (Cell* cell : cells)
+		{
+			if (cell->currentState.type == CellType::Healthy)
+				num_of_Healthy_cells++;
+			
+		}
+		
+		return num_of_Healthy_cells;
+	}
+	
+	double ReturnDrugConcentration()
+	{
+		double drug_conc_total = 0;
+		
+		for(int ii = 0; ii <=281; ii++)
+		{
+			drug_conc_total += drugConcentration[ii];
+			
+		}
+		return drug_conc_total;
+		
+	}
+	
 };
