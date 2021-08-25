@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 
 #define _USE_MATH_DEFINES
 
@@ -9,7 +10,7 @@
 
 using namespace::std;
 
-enum class CellType { Cancer = 1, Dead = 3, Healthy = 4, PSC = 5, Empty = 6 };
+enum class CellType { Cancer = 1, Dead = 3, Healthy = 4, Empty = 5, PSC = 51 };
 
 class Cell;
 
@@ -144,15 +145,32 @@ public:
 
 	bool DrugInducedDeath(Params* parameters, double* drugConcentration, int gridRadius)
 	{
+		assert(-gridRadius <= currentState.X && currentState.X <= gridRadius);
+		assert(-gridRadius <= currentState.Y && currentState.Y <= gridRadius);
+
 		int nearestX = round(currentState.X) + gridRadius;
 		int nearestY = round(currentState.Y) + gridRadius;
-		double concentration = drugConcentration[nearestY * (gridRadius*2+1) + nearestX];
-		return concentration > 0 && parameters->WithProbability(concentration / (concentration + parameters->EC50)); // we need to make this a parameter we set instead of being just 1
+
+		double concentration = drugConcentration[nearestY * (gridRadius * 2 + 1) + nearestX];
+		if (concentration > 0)
+			return parameters->WithProbability(concentration / (concentration + parameters->EC50));
+		else
+			return false;
 	}
 
 	void Die()
 	{
 		newState.type = CellType::Dead;
+		newState.age = 0;
+	}
+
+	void Disintegrate()
+	{
+		int dage = 3; //number of hours it takes for cell to completely disintegrate
+		if (currentState.age > dage)
+			newState.type = CellType::Empty;
+		else
+			newState.spring_length /= 8;
 	}
 
 	void PossiblyPSCInfectNeighbour(Params* parameters)
@@ -192,35 +210,14 @@ public:
 		newState.X = currentState.X + Fx * Params::Delta_t;
 		newState.Y = currentState.Y + Fy * Params::Delta_t;
 	}
-	
-	void Disintegrate()
-	{
-		if (currentState.age > 3) // Cell has finished dying, make empty cell     
-		{
-			newState.type = CellType::Empty;
-		}
-		else 
-		{			
-			newState.spring_length = currentState.spring_length/8;// shorten spring length
-		}
-	}
 
 	Cell* PossiblyPoliferate(vector<Cell*> &boundaryCells, Params* parameters)
 	{
 		if (!TooYoung(parameters) && !TooCrowded())
 		{
 			double distanceToBoundry = DistanceFromBoundary(boundaryCells);
-			//double scal = (1 - distanceToBoundry / parameters->dmax);
-			//double pp = parameters->p_0 * scal;
-			if (!Necrotic(distanceToBoundry, parameters))
-			{
-				//parameters->opportunities++;
-				if (parameters->WithProbability(parameters->p_0 * (1 - distanceToBoundry / parameters->dmax)))
-				{
-					//parameters->created++;
-					return Proliferate(parameters);
-				}
-			}
+			if (!Necrotic(distanceToBoundry, parameters) && parameters->WithProbability(parameters->p_0 * (1 - distanceToBoundry / parameters->dmax)))
+			    return Proliferate(parameters);
 		}
 
 		return NULL;
@@ -234,7 +231,29 @@ public:
 		newState.X = currentState.X + scale * cos(M_PI + theta);
 		newState.Y = currentState.Y + scale * sin(M_PI + theta);
 		newState.spring_length = Params::s / parameters->page;
-		newState.age = 1;
+		
+		double age_prob = parameters->RandomDouble();
+		if(age_prob<0.1)
+		{newState.age = 1;}
+		else if(age_prob<0.2)
+		{newState.age = 2;}
+		else if(age_prob<0.3)
+		{newState.age = 3;}
+		else if(age_prob<0.4)
+		{newState.age = 4;}
+		else if(age_prob<0.5)
+		{newState.age = 5;}
+		else if(age_prob<0.6)
+		{newState.age = 6;}
+		else if(age_prob<0.7)
+		{newState.age = 7;}
+		else if(age_prob<0.8)
+		{newState.age = 8;}
+		else if(age_prob<0.9)
+		{newState.age = 9;}
+		else 
+		{newState.age = 10;}
+			
 		return newState.sibling;
 	}
 };
