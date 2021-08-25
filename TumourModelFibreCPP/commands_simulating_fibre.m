@@ -12,17 +12,20 @@ EC50 = 0.01;
 p0 = 0.2;
 
 tumour_volume_initial = 201; %this is the size of the tumour we want to grow before we simulate treatment (or in this case no treatment)
-p = clib.Model.SeedAndGrowToStartVolume(p0, psc, dmax, gage, page, EC50, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
+p = clib.Model.SeedAndGrowToStartVolumeM(p0, psc, dmax, gage, page, EC50, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
+
+
 
 % initialise drug injection location and concentration
-xinj1 = 0;
+xinj1 = 50;
 yinj1 = 0;
-C0 = 50; 
+C0 = 500; 
 
-for jj = 1:5 % does 250 different simulations of tumour growth
+for jj = 1:300 % does 250 different simulations of tumour growth
     
     psim = clib.Model.CreateNewParticle(p0, psc, dmax, gage, page, EC50, p); %sets the initial tumour size for the simulation as the size of the tumour "p", i.e. tumour_volume_initial
     psim.InjectFibre(10, 10, C0*2000/(10+1))
+    %psim.InjectPoint(xinj1,yinj1,C0);
         
     for ii = 1:33 %simulates 33 days of tumour growth one day at a time - if possible can you also simulate for 50 and 100 days so we can see the difference between the three
         
@@ -76,11 +79,11 @@ figure
 hold on 
 yyaxis left
 plot(NumberTcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
-ylabel('Cells')
+ylabel('Tumour cells')
 yyaxis right
 plot(NumberHealthycells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
 xlabel('Time (days)')
-ylabel('Cells')
+ylabel('Healthy cells')
 set(gca,'FontSize',18)
 title('Tumour vs healthy cells')
 

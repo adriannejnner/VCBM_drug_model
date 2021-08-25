@@ -151,7 +151,7 @@ public:
 		int nearestX = round(currentState.X) + gridRadius;
 		int nearestY = round(currentState.Y) + gridRadius;
 
-		double concentration = drugConcentration[nearestY * (gridRadius*2+1) + nearestX];
+		double concentration = drugConcentration[nearestY * (gridRadius * 2 + 1) + nearestX];
 		if (concentration > 0)
 			return parameters->WithProbability(concentration / (concentration + parameters->EC50));
 		else

@@ -23,35 +23,63 @@ double eps(double t)
     }
 }
 
-#define y_mat(i, j) y[(j)*grid_size+(i)]
-#define dy(i, j)    dydt[(j)*grid_size+(i)]
+void Display(const char* name, double* yy, int Width)
+{
+    double total = 0;
+    for (int y = 0; y < Width; y++)
+    {
+        for (int x = 0; x < Width; x++)
+        {
+            printf("%6.3f ", yy[y * Width + x]);
+            total += yy[y * Width + x];
+        }
+        printf("\n");
+    }
+    printf("%s total = %f\n", name, total);
+}
+
+#define y_mat(i, j) y[(j)*G+(i)]
+#define dy(i, j)    dydt[(j)*G+(i)]
 
 double delta = 0.01;
-double clearance = 2;
+double clearance = 0.02;
 
-void odeFcn_main(double t, int grid_size, double* y, double* dydt, int fibreX, int fibreY)
+#define diffuse2(c0, n1, n2)         (delta/4 * ((n1+n2-2*c0) - clearance * c0))
+#define diffuse3(c0, n1, n2, n3)     (delta/4 * ((n1+n2+n3-3*c0) - clearance * c0))
+#define diffuse4(c0, n1, n2, n3, n4) (delta/4 * ((n1+n2+n3+n4-4*c0) - clearance * c0))
+
+int cc = 0;
+
+
+void odeFcn_main(double t, int G, double* y, double* dydt, int fibreX, int fibreY)
 {
-    dy(0, 0) = dy(grid_size - 1, 0) = dy(0, grid_size - 1) = dy(grid_size - 1, grid_size - 1) = 0;
+    cc++;
+    //Display("y", y, G);
+    dy(0, 0)     = diffuse2(y_mat(0, 0),     y_mat(0, 1),     y_mat(1, 0));
+    dy(G-1, 0)   = diffuse2(y_mat(G-1, 0),   y_mat(G-1, 1),   y_mat(G-2, 0));
+    dy(0, G-1)   = diffuse2(y_mat(0, G-1),   y_mat(1, G-1),   y_mat(0, G-2));
+    dy(G-1, G-1) = diffuse2(y_mat(G-1, G-1), y_mat(G-2, G-1), y_mat(G-1, G-2));
     
-    for (int jj = 1; jj < grid_size - 1; jj++)
+    for (int jj = 1; jj < G - 1; jj++)
     {
-        dy(0, jj) = (delta / 4 * y_mat(1, jj) + delta / 4 * y_mat(0, jj - 1) + delta / 4 * y_mat(0, jj + 1)) - 3 * delta / 4 * y_mat(0, jj) - clearance * y_mat(0, jj);
-        dy(grid_size-1, jj) = (delta / 4 * y_mat(grid_size - 2, jj) + delta / 4 * y_mat(grid_size-1, jj - 1) + delta / 4 * y_mat(grid_size-1, jj + 1)) - 3 * delta / 4 * y_mat(grid_size-1, jj) - clearance * y_mat(grid_size-1, jj);
-        dy(jj, 0) = (delta / 4 * y_mat(jj + 1, 0) + delta / 4 * y_mat(jj - 1, 0) + delta / 4 * y_mat(jj, 1)) - delta * y_mat(jj, 0) - clearance * y_mat(jj, 0);
-        dy(jj, grid_size-1) = (delta / 4 * y_mat(jj + 1, grid_size-1) + delta / 4 * y_mat(jj - 1, grid_size-1) + delta / 4 * y_mat(jj, grid_size-2)) - delta * y_mat(jj, grid_size-1) - clearance * y_mat(jj, grid_size-1);
+        dy(0, jj)   = diffuse3(y_mat(0, jj),   y_mat(1, jj),     y_mat(0, jj-1),   y_mat(0, jj+1));
+        dy(G-1, jj) = diffuse3(y_mat(G-1, jj), y_mat(G-2, jj),   y_mat(G-1, jj-1), y_mat(G-1, jj+1));
+        dy(jj, 0)   = diffuse3(y_mat(jj, 0),   y_mat(jj+1, 0),   y_mat(jj-1, 0),   y_mat(jj, 1));
+        dy(jj, G-1) = diffuse3(y_mat(jj, G-1), y_mat(jj+1, G-1), y_mat(jj-1, G-1), y_mat(jj, G-2));
     }
     
-    for (int ii = 1; ii < grid_size - 1; ii++)
-        for (int jj = 1; jj < grid_size - 1; jj++)
-            dy(ii, jj) = (delta / 4 * y_mat(ii + 1, jj) + delta / 4 * y_mat(ii - 1, jj) + delta / 4 * y_mat(ii, jj - 1) + delta / 4 * y_mat(ii, jj + 1)) - delta * y_mat(ii, jj) - clearance * y_mat(ii, jj);
+    for (int ii = 1; ii < G - 1; ii++)
+        for (int jj = 1; jj < G - 1; jj++)
+            dy(ii, jj) = diffuse4(y_mat(ii, jj), y_mat(ii+1, jj), y_mat(ii, jj+1), y_mat(ii-1, jj), y_mat(ii, jj-1));
 
     // evaluating fibre release
     double d = Params::k / (t / 10 + 1) + Params::d_const; // release rate - NOTE depends on t explicitly
 	//double d = drug_release_rate(t);
+    //printf("t = %f\n", t);
 
-    double* F_vec = y + grid_size*grid_size; // extract the interior fibre concentrations from the vector yand convert to vec
+    double* F_vec = y + G*G; // extract the interior fibre concentrations from the vector yand convert to vec
 
-    double* dF = dydt + grid_size * grid_size;
+    double* dF = dydt + G * G;
 
     dF[0] = d * (F_vec[1] - F_vec[0]) * (Params::r0 + Params::Deltar / 2) / Params::r0; // compartment 0
 
@@ -64,12 +92,15 @@ void odeFcn_main(double t, int grid_size, double* y, double* dydt, int fibreX, i
     
     dF[Params::N-1] = d * (F_vec[Params::N-2] - F_vec[Params::N-1]) * (Params::r0 + Params::N * Params::Deltar + Params::Deltar / 2) / Params::Aout;
 
-    int grid_radius = grid_size / 2;
+    int grid_radius = G / 2;
 
     // Fibre starts at location (fibreX,fibreY) and extends horizontally to the right
     for (int i = 0; i < Params::L; i++)
         dy(grid_radius + fibreX + i, grid_radius + fibreY) += dF[Params::N - 1];
+
+    //Display("dy", dydt, G);
 }
+
 /*
 double drug_release_rate(double t)
 {
@@ -110,8 +141,30 @@ double e5 = -17253.0 / 339200;
 double e6 = 22.0 / 525;
 double e7 = -1.0 / 40;
 
+
+
+void DiffuseSimple(double t0, double tfinal, double* y, int grid_size, int fibreX, int fibreY)
+{
+    int NN = grid_size * grid_size + Params::N;
+
+    double* dy = new double[NN];
+    for (int t = t0; t < tfinal; t++)
+    {
+        //Display("y", y, grid_size);
+        odeFcn_main(t, grid_size, y, dy, fibreX, fibreY);
+
+        //Display("dy", dy, grid_size);
+        for (int i = 0; i < NN; i++)
+            y[i] += dy[i];
+    }
+    delete[] dy;
+}
+
+
 void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, int fibreY)
 {
+    int NN = grid_size * grid_size + Params::N;
+
     _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 
     int iterations = 0;
@@ -122,14 +175,14 @@ void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, in
     int nfevals = 0;
     int nfailed = 0;
 
-    double* f1   = new double[grid_size * grid_size + Params::N];
-    double* f2   = new double[grid_size * grid_size + Params::N];
-    double* f3   = new double[grid_size * grid_size + Params::N];
-    double* f4   = new double[grid_size * grid_size + Params::N];
-    double* f5   = new double[grid_size * grid_size + Params::N];
-    double* f6   = new double[grid_size * grid_size + Params::N];
-    double* f7   = new double[grid_size * grid_size + Params::N];
-    double* ynew = new double[grid_size * grid_size + Params::N];
+    double* f1   = new double[NN];
+    double* f2   = new double[NN];
+    double* f3   = new double[NN];
+    double* f4   = new double[NN];
+    double* f5   = new double[NN];
+    double* f6   = new double[NN];
+    double* f7   = new double[NN];
+    double* ynew = new double[NN];
 
     double hmax = 0.1 * (abs(tfinal - t0));
     double htspan = 1; // = t1 - t0
@@ -149,7 +202,7 @@ void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, in
     double absh = std::min(hmax, htspan);
 
     double largest0 = 0;
-    for (int i = 0; i < grid_size * grid_size; i++)
+    for (int i = 0; i < NN; i++)
     {
         double r = std::abs(f1[i] / std::max(abs(y[i]), threshold));
         if (r > largest0)
@@ -180,27 +233,27 @@ void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, in
         while (true)
         {
             iterations++;
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b11 * f1[i]);
             double t2 = t + h * a2;
             odeFcn_main(t2, grid_size, ynew, f2, fibreX, fibreY);
 
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b21 * f1[i] + b22 * f2[i]);
             double t3 = t + h * a3;
             odeFcn_main(t3, grid_size, ynew, f3, fibreX, fibreY);
 
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b31 * f1[i] + b32 * f2[i] + b33 * f3[i]);
             double t4 = t + h * a4;
             odeFcn_main(t4, grid_size, ynew, f4, fibreX, fibreY);
 
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b41 * f1[i] + b42 * f2[i] + b43 * f3[i] + b44 * f4[i]);
             double t5 = t + h * a5;
             odeFcn_main(t5, grid_size, ynew, f5, fibreX, fibreY);
 
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b51 * f1[i] + b52 * f2[i] + b53 * f3[i] + b54 * f4[i] + b55 * f5[i]);
             double t6 = t + h;
             odeFcn_main(t6, grid_size, ynew, f6, fibreX, fibreY);
@@ -209,14 +262,14 @@ void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, in
             if (done)
                 tnew = tfinal;   // Hit end point exactly.
             h = tnew - t;      // Purify h.
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
                 ynew[i] = y[i] + h * (b61 * f1[i] + b63 * f3[i] + b64 * f4[i] + b65 * f5[i] + b66 * f6[i]);
             odeFcn_main(tnew, grid_size, ynew, f7, fibreX, fibreY);
 
             nfevals = nfevals + 6;
 
             double largest = 0;
-            for (int i = 0; i < grid_size * grid_size; i++)
+            for (int i = 0; i < NN; i++)
             {
                 double fE = f1[i] * e1 + f3[i] * e3 + f4[i] * e4 + f5[i] * e5 + f6[i] * e6 + f7[i] * e7;
                 double r = std::abs(fE / std::max(std::max(y[i], ynew[i]), threshold));
@@ -256,7 +309,7 @@ void Diffuse(double t0, double tfinal, double* y0, int grid_size, int fibreX, in
         // Advance the integration one step.
         t = tnew;
 
-        for (int i = 0; i < grid_size * grid_size; i++)
+        for (int i = 0; i < NN; i++)
         {
             y[i] = ynew[i];
             f1[i] = f7[i];

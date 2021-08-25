@@ -16,16 +16,19 @@ double totalTime = 0;
 class Pancreas
 {
 public:
-	Pancreas(vector<Cell*> &input_cells, Params* parameters)
+	Pancreas(Pancreas *existing, Params* parameters)
 	{
 		this->parameters = parameters;
 
-		memset(drugConcentration, 0, sizeof(drugConcentration));
+		memcpy(drugConcentration, existing->drugConcentration, sizeof(drugConcentration));
+		this->timeSinceInjection = existing->timeSinceInjection;
+		this->fibreX = existing->fibreX;
+		this->fibreY = existing->fibreY;
 
 		// Clone the input cells in case those cells are used in more than one particle
 		map<Cell*, Cell*> map;
 
-		for (Cell* cell : input_cells)
+		for (Cell* cell : existing->cells)
 		{
 			Cell* clone = new Cell(cell);
 			cells.push_back(clone);
@@ -35,6 +38,15 @@ public:
 		for (Cell* cell : cells)
 			cell->updateSibling(map);
 
+		src = dst = NULL;
+	}
+
+	Pancreas(Params* parameters)
+	{
+		this->parameters = parameters;
+		memset(drugConcentration, 0, sizeof(drugConcentration));
+		timeSinceInjection = -1;
+		fibreX = fibreY = 0;
 		src = dst = NULL;
 	}
 
@@ -48,15 +60,15 @@ public:
 
 	Pancreas* CreateNewParticle(Params* parameters)
 	{
-		return new Pancreas(cells, parameters);
+		return new Pancreas(this, parameters);
 	}
 
-#define gridRadius	140
+#define gridRadius	70
 #define gridWidth	(gridRadius*2+1)
 
 	void InjectPoint(int x, int y, double amount)
 	{
-		injected = true;
+		timeSinceInjection = 0;
 		drugConcentration[(gridRadius + y) * gridWidth + (gridRadius + x)] += amount;
 	}
 
@@ -65,9 +77,10 @@ public:
 		// fibre starts at location (x,y) and extends horizontally to the right
 		fibreX = x;
 		fibreY = y;
-		injected = true;
-		for (int i = 0; i < Params::N - 1; i++)
+		timeSinceInjection = 0;
+		for (int i = 0; i < Params::N-1; i++)
 			fibreConcentration[i] = amount;
+		fibreConcentration[Params::N - 1] = 0;
 	}
 
 private:
@@ -79,8 +92,8 @@ private:
 	Cell* src, *dst; // the two cells that are furthest apart - using for computing dimensions of tumour
 
 public:
-	int fibreX= -1000, fibreY = -1000;
-	bool injected = false;
+	int fibreX, fibreY;
+	long timeSinceInjection;
 	double drugConcentration[gridWidth * gridWidth + Params::N];
 	double* fibreConcentration = drugConcentration + gridWidth * gridWidth;
 
@@ -397,8 +410,11 @@ public:
 	{
 		DetermineBoundaryCells();
 
-		if (injected)
-			Diffuse(0, 60, drugConcentration, gridWidth, fibreX, fibreY);
+		if (timeSinceInjection >= 0)
+		{
+			DiffuseSimple(timeSinceInjection, timeSinceInjection + 60, drugConcentration, gridWidth, fibreX, fibreY);
+			timeSinceInjection += 60;
+		}
 
 		for (Cell* cell : cells)
 		{
@@ -445,70 +461,57 @@ public:
 		DetermineNeighbours();
 	}
 
-	double SimulateOneDay(int day)//, void (*render)(int, int, Pancreas*, int))
+	double SimulateOneDay(int day, void (*render)(int, int, Pancreas*, int))
 	{
 		DetermineNeighbours();
 		
-		for (int hour = 1; hour <= Params::tinterval; hour++)
+		for (int hour = 0; hour < Params::tinterval; hour++)
 		{
+			if (render) render(day, hour, this, gridRadius);
 			SimulateOneHour();
-			//if (render) render(day, hour, this, gridRadius);
 		}
+		if (render) render(day, Params::tinterval, this, gridRadius);
 		return TumourVolume();
 	}
+    
+    double SimulateOneDay(int day)
+	{
+        return SimulateOneDay(day, NULL);
+	}
 	
-	double ReturnTotalNumberTumourCells()
+	int ReturnTotalNumberTumourCells()
 	{
 		int num_of_cancer_cells = 0;
-		
 		for (Cell* cell : cells)
-		{
 			if (cell->currentState.type == CellType::Cancer)
 				num_of_cancer_cells++;
-			
-		}
-		
 		return num_of_cancer_cells;
 	}
 	
-	double ReturnTotalNumberDeadCells()
+	int ReturnTotalNumberDeadCells()
 	{
-		int num_of_dead_cells = 0;
-		
+		int num_of_dead_cells = 0;	
 		for (Cell* cell : cells)
-		{
 			if (cell->currentState.type == CellType::Dead)
 				num_of_dead_cells++;
-			
-		}
-		
 		return num_of_dead_cells;
 	}
 	
-	double ReturnTotalNumberPSCCells()
+	int ReturnTotalNumberPSCCells()
 	{
-		int num_of_PSC_cells = 0;
-		
+		int num_of_PSC_cells = 0;	
 		for (Cell* cell : cells)
-		{
 			if (cell->currentState.type == CellType::PSC)
-				num_of_PSC_cells++;
-			
-		}
-		
+				num_of_PSC_cells++;		
 		return num_of_PSC_cells;
 	}
 	
-	double ReturnTotalNumberHealthyCells()
+	int ReturnTotalNumberHealthyCells()
 	{
-		int num_of_Healthy_cells = 0;
-		
+		int num_of_Healthy_cells = 0;	
 		for (Cell* cell : cells)
-		{
 			if (cell->currentState.type == CellType::Healthy)
 				num_of_Healthy_cells++;
-			
-		}
 		
 		return num_of_Healthy_cells;
 	}
@@ -516,23 +519,17 @@ public:
 	double ReturnDrugConcentrationDomain()
 	{
 		double drug_conc_total = 0;
-		
-		for(int ii = 0; ii <=78961; ii++)
-		{
+		for(int ii = 0; ii <gridWidth * gridWidth; ii++)
 			drug_conc_total += drugConcentration[ii];
-		}
 		return drug_conc_total;
 		
 	}
 	
 	double ReturnDrugConcentrationinFibre()
 	{
-		double drug_conc_fibre_total = 0;
-		
-		for(int ii = 0; ii <=Params::N; ii++)
-		{
-			drug_conc_fibre_total += drugConcentration[78961+ii];
-		}
+		double drug_conc_fibre_total = 0;	
+		for(int ii = 0; ii <Params::N; ii++)
+			drug_conc_fibre_total += fibreConcentration[ii];
 		return drug_conc_fibre_total;
 		
 	}
