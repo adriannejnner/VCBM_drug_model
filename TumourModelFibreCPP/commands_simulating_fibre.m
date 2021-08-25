@@ -17,25 +17,29 @@ p = clib.Model.SeedAndGrowToStartVolumeM(p0, psc, dmax, gage, page, EC50, tumour
 
 
 % initialise drug injection location and concentration
-xinj1 = 50;
-yinj1 = 0;
-C0 = 500; 
+xinj1 = 0;
+yinj1 = 50;
+C0 = 526; 
 
-for jj = 1:300 % does 250 different simulations of tumour growth
+for jj = 1:250 % does 250 different simulations of tumour growth
     
     psim = clib.Model.CreateNewParticle(p0, psc, dmax, gage, page, EC50, p); %sets the initial tumour size for the simulation as the size of the tumour "p", i.e. tumour_volume_initial
-    psim.InjectFibre(10, 10, C0*2000/(10+1))
-    %psim.InjectPoint(xinj1,yinj1,C0);
-        
+    psim.InjectFibre(xinj1, yinj1, C0*2000/(10+1));% injects fibre at position xinj1 yinj1 of concentration C0
+    
+    % initialising the vectors
+
+    TotalAout(1) = psim.ReturnDrugConcentrationAout;
+    
     for ii = 1:33 %simulates 33 days of tumour growth one day at a time - if possible can you also simulate for 50 and 100 days so we can see the difference between the three
         
         Tvol(ii) = psim.SimulateOneDay(1); %simulates the growth of the tumour for one day and returns its volume
-        NumberTcells(ii) = psim.ReturnTotalNumberTumourCells;
-        NumberDeadcells(ii) = psim.ReturnTotalNumberDeadCells;
-        NumberPSCcells(ii) = psim.ReturnTotalNumberPSCCells;
+        NumberTcells(ii) = psim.ReturnTotalNumberTumourCells;% returns total number of tumour cells
+        NumberDeadcells(ii) = psim.ReturnTotalNumberDeadCells;% returned total number of dead cells
+        NumberPSCcells(ii) = psim.ReturnTotalNumberPSCCells;% returned total number of PSC cells
         NumberHealthycells(ii) = psim.ReturnTotalNumberHealthyCells;
-        Totaldrugconc(ii) = psim.ReturnDrugConcentrationDomain;
-        Totaldrugconcfibre(ii) = psim.ReturnDrugConcentrationinFibre;
+        Totaldrugconc(ii) = psim.ReturnDrugConcentrationDomain;% returned total number of healthy cells
+        Totaldrugconcfibre(ii) = psim.ReturnDrugConcentrationinFibre; % returned total Drug conc in domain
+        TotalAout(ii+1) = psim.ReturnDrugConcentrationAout; % returned total concentration released from fibre
         
     end
     
@@ -46,7 +50,7 @@ for jj = 1:300 % does 250 different simulations of tumour growth
     NumberPSCcells_mat(jj,:) = NumberPSCcells;
     NumberHealthycells_mat(jj,:) = NumberHealthycells;
     Totaldrugconc_mat(jj,:) = Totaldrugconc;
-    Totaldrugconcfibre_mat(jj,:) = Totaldrugconcfibre;
+    TotalAout_mat(jj,:) = TotalAout;
     jj
 end
 save('Longinj.mat', 'Tvol_mat');
@@ -55,19 +59,19 @@ save('Longinj.mat', 'Tvol_mat');
 figure
 hold on 
 yyaxis left
-plot(Totaldrugconc_mat')%,'Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(1:33,Totaldrugconc_mat')%,'Color',[0.5 0.5 0.5], 'LineWidth',1)
 ylabel('Drug outside fibre')
 yyaxis right
-plot(Totaldrugconcfibre_mat')%,'Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(0:33,TotalAout_mat')%,'Color',[0.5 0.5 0.5], 'LineWidth',1)
 xlabel('Time (days)')
-ylabel('Drug in fibre')
+ylabel('Fibre drug release curve')
 set(gca,'FontSize',18)
 title('Total drug concentration')
 
 % % plots the tumour volume of 10 simulations of the model for the same parameter values
 figure
 hold on 
-plot(Tvol_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(1:33,Tvol_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
 xlabel('Time (days)')
 ylabel('Tumour volume (mm^3)')
 set(gca,'FontSize',18)
@@ -78,7 +82,7 @@ title('Tumour cells')
 figure
 hold on 
 yyaxis left
-plot(NumberTcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(1:33,NumberTcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
 ylabel('Tumour cells')
 yyaxis right
 plot(NumberHealthycells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
@@ -90,7 +94,7 @@ title('Tumour vs healthy cells')
 % % plots the tumour volume of 10 simulations of the model for the same parameter values
 figure
 hold on 
-plot(NumberDeadcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(1:33,NumberDeadcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
 xlabel('Time (days)')
 ylabel('Cells')
 set(gca,'FontSize',18)
@@ -108,14 +112,12 @@ title('Dead cells')
 % % plots the tumour volume of 10 simulations of the model for the same parameter values
 figure
 hold on 
-plot(NumberPSCcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
+plot(1:33,NumberPSCcells_mat',':','Color',[0.5 0.5 0.5], 'LineWidth',1)
 xlabel('Time (days)')
 ylabel('Cells')
 set(gca,'FontSize',18)
 title('PSC cells')
 % 
-
-
 % 
 % %plots the mean and std of the 10 simulations of tumour volume
 fig1 = figure

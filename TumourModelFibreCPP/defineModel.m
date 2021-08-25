@@ -11,7 +11,7 @@
 function libDef = defineModel()
 libDef = clibgen.LibraryDefinition("ModelData.xml");
 %% OutputFolder and Libraries 
-libDef.OutputFolder = "C:\Users\kellyw\Downloads\VCBM_drug_model-main (3)\VCBM_drug_model-main\TumourModelFibreCPP";
+libDef.OutputFolder = "C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\2021\Polymer\Izzy\TumourModelFibreCPP";
 libDef.Libraries = "";
 
 %% C++ enumeration |CellType| with MATLAB name |clib.Model.CellType| 
@@ -62,8 +62,8 @@ addProperty(CellStateDefinition, "spring_length", "double", ...
 
 %% C++ class public data member |sibling| for C++ class |CellState| 
 % C++ Signature: Cell * CellState::sibling
-%addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", <SHAPE>, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%    "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
+addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+   "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
 
 %% C++ class public data member |X| for C++ class |CellState| 
 % C++ Signature: double CellState::X
@@ -145,24 +145,24 @@ CellDefinition = addClass(libDef, "Cell", "MATLABName", "clib.Model.Cell", ...
 
 %% C++ class constructor for C++ class |Cell| 
 % C++ Signature: Cell::Cell(double X,double Y,double spring_length,Cell * sibling,CellType type,int age)
-%CellConstructor1Definition = addConstructor(CellDefinition, ...
-%    "Cell::Cell(double X,double Y,double spring_length,Cell * sibling,CellType type,int age)", ...
-%    "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(CellConstructor1Definition, "X", "double");
-%defineArgument(CellConstructor1Definition, "Y", "double");
-%defineArgument(CellConstructor1Definition, "spring_length", "double");
-%defineArgument(CellConstructor1Definition, "sibling", "clib.Model.Cell", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%defineArgument(CellConstructor1Definition, "type", "clib.Model.CellType");
-%defineArgument(CellConstructor1Definition, "age", "int32");
-%validate(CellConstructor1Definition);
+CellConstructor1Definition = addConstructor(CellDefinition, ...
+   "Cell::Cell(double X,double Y,double spring_length,Cell * sibling,CellType type,int age)", ...
+   "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
+defineArgument(CellConstructor1Definition, "X", "double");
+defineArgument(CellConstructor1Definition, "Y", "double");
+defineArgument(CellConstructor1Definition, "spring_length", "double");
+defineArgument(CellConstructor1Definition, "sibling", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+defineArgument(CellConstructor1Definition, "type", "clib.Model.CellType");
+defineArgument(CellConstructor1Definition, "age", "int32");
+validate(CellConstructor1Definition);
 
 %% C++ class constructor for C++ class |Cell| 
 % C++ Signature: Cell::Cell(Cell * cell)
-%CellConstructor2Definition = addConstructor(CellDefinition, ...
-%    "Cell::Cell(Cell * cell)", ...
-%    "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(CellConstructor2Definition, "cell", "clib.Model.Cell", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%validate(CellConstructor2Definition);
+CellConstructor2Definition = addConstructor(CellDefinition, ...
+   "Cell::Cell(Cell * cell)", ...
+   "Description", "clib.Model.Cell.Cell    Constructor of C++ class Cell."); % Modify help description values as needed.
+defineArgument(CellConstructor2Definition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+validate(CellConstructor2Definition);
 
 %% C++ class method |Renew| for C++ class |Cell| 
 % C++ Signature: void Cell::Renew()
@@ -210,12 +210,12 @@ validate(TooCrowdedDefinition);
 
 %% C++ class method |DistanceSquaredTo| for C++ class |Cell| 
 % C++ Signature: double Cell::DistanceSquaredTo(Cell * cell)
-%DistanceSquaredToDefinition = addMethod(CellDefinition, ...
-%    "double Cell::DistanceSquaredTo(Cell * cell)", ...
-%    "Description", "clib.Model.Cell.DistanceSquaredTo    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(DistanceSquaredToDefinition, "cell", "clib.Model.Cell", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%defineOutput(DistanceSquaredToDefinition, "RetVal", "double");
-%validate(DistanceSquaredToDefinition);
+DistanceSquaredToDefinition = addMethod(CellDefinition, ...
+   "double Cell::DistanceSquaredTo(Cell * cell)", ...
+   "Description", "clib.Model.Cell.DistanceSquaredTo    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(DistanceSquaredToDefinition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+defineOutput(DistanceSquaredToDefinition, "RetVal", "double");
+validate(DistanceSquaredToDefinition);
 
 %% C++ class method |DistanceSquaredFromCentre| for C++ class |Cell| 
 % C++ Signature: double Cell::DistanceSquaredFromCentre()
@@ -227,41 +227,41 @@ validate(DistanceSquaredFromCentreDefinition);
 
 %% C++ class method |Necrotic| for C++ class |Cell| 
 % C++ Signature: bool Cell::Necrotic(double distanceToBoundary,Params * parameters)
-%NecroticDefinition = addMethod(CellDefinition, ...
-%    "bool Cell::Necrotic(double distanceToBoundary,Params * parameters)", ...
-%    "Description", "clib.Model.Cell.Necrotic    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(NecroticDefinition, "distanceToBoundary", "double");
-%defineArgument(NecroticDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%defineOutput(NecroticDefinition, "RetVal", "logical");
-%validate(NecroticDefinition);
+NecroticDefinition = addMethod(CellDefinition, ...
+   "bool Cell::Necrotic(double distanceToBoundary,Params * parameters)", ...
+   "Description", "clib.Model.Cell.Necrotic    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(NecroticDefinition, "distanceToBoundary", "double");
+defineArgument(NecroticDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+defineOutput(NecroticDefinition, "RetVal", "logical");
+validate(NecroticDefinition);
 
 %% C++ class method |TooYoung| for C++ class |Cell| 
 % C++ Signature: bool Cell::TooYoung(Params * parameters)
-%TooYoungDefinition = addMethod(CellDefinition, ...
-%    "bool Cell::TooYoung(Params * parameters)", ...
-%    "Description", "clib.Model.Cell.TooYoung    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(TooYoungDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%defineOutput(TooYoungDefinition, "RetVal", "logical");
-%validate(TooYoungDefinition);
+TooYoungDefinition = addMethod(CellDefinition, ...
+   "bool Cell::TooYoung(Params * parameters)", ...
+   "Description", "clib.Model.Cell.TooYoung    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(TooYoungDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+defineOutput(TooYoungDefinition, "RetVal", "logical");
+validate(TooYoungDefinition);
 
 %% C++ class method |LengthenSpring| for C++ class |Cell| 
 % C++ Signature: void Cell::LengthenSpring(Params * parameters)
-%LengthenSpringDefinition = addMethod(CellDefinition, ...
-%    "void Cell::LengthenSpring(Params * parameters)", ...
-%    "Description", "clib.Model.Cell.LengthenSpring    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(LengthenSpringDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%validate(LengthenSpringDefinition);
+LengthenSpringDefinition = addMethod(CellDefinition, ...
+   "void Cell::LengthenSpring(Params * parameters)", ...
+   "Description", "clib.Model.Cell.LengthenSpring    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(LengthenSpringDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+validate(LengthenSpringDefinition);
 
 %% C++ class method |DrugInducedDeath| for C++ class |Cell| 
 % C++ Signature: bool Cell::DrugInducedDeath(Params * parameters,double * drugConcentration,int gridRadius)
-%DrugInducedDeathDefinition = addMethod(CellDefinition, ...
-%    "bool Cell::DrugInducedDeath(Params * parameters,double * drugConcentration,int gridRadius)", ...
-%    "Description", "clib.Model.Cell.DrugInducedDeath    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(DrugInducedDeathDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%defineArgument(DrugInducedDeathDefinition, "drugConcentration", "clib.array.Model.Double", "input", <SHAPE>); % '<MLTYPE>' can be clib.array.Model.Double, or double
-%defineArgument(DrugInducedDeathDefinition, "gridRadius", "int32");
-%defineOutput(DrugInducedDeathDefinition, "RetVal", "logical");
-%validate(DrugInducedDeathDefinition);
+DrugInducedDeathDefinition = addMethod(CellDefinition, ...
+   "bool Cell::DrugInducedDeath(Params * parameters,double * drugConcentration,int gridRadius)", ...
+   "Description", "clib.Model.Cell.DrugInducedDeath    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(DrugInducedDeathDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+defineArgument(DrugInducedDeathDefinition, "drugConcentration", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
+defineArgument(DrugInducedDeathDefinition, "gridRadius", "int32");
+defineOutput(DrugInducedDeathDefinition, "RetVal", "logical");
+validate(DrugInducedDeathDefinition);
 
 %% C++ class method |Die| for C++ class |Cell| 
 % C++ Signature: void Cell::Die()
@@ -279,11 +279,11 @@ validate(DisintegrateDefinition);
 
 %% C++ class method |PossiblyPSCInfectNeighbour| for C++ class |Cell| 
 % C++ Signature: void Cell::PossiblyPSCInfectNeighbour(Params * parameters)
-%PossiblyPSCInfectNeighbourDefinition = addMethod(CellDefinition, ...
-%    "void Cell::PossiblyPSCInfectNeighbour(Params * parameters)", ...
-%    "Description", "clib.Model.Cell.PossiblyPSCInfectNeighbour    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(PossiblyPSCInfectNeighbourDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%validate(PossiblyPSCInfectNeighbourDefinition);
+PossiblyPSCInfectNeighbourDefinition = addMethod(CellDefinition, ...
+   "void Cell::PossiblyPSCInfectNeighbour(Params * parameters)", ...
+   "Description", "clib.Model.Cell.PossiblyPSCInfectNeighbour    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(PossiblyPSCInfectNeighbourDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+validate(PossiblyPSCInfectNeighbourDefinition);
 
 %% C++ class method |Move| for C++ class |Cell| 
 % C++ Signature: void Cell::Move()
@@ -294,12 +294,12 @@ validate(MoveDefinition);
 
 %% C++ class method |Proliferate| for C++ class |Cell| 
 % C++ Signature: Cell * Cell::Proliferate(Params * parameters)
-%ProliferateDefinition = addMethod(CellDefinition, ...
-%    "Cell * Cell::Proliferate(Params * parameters)", ...
-%    "Description", "clib.Model.Cell.Proliferate    Method of C++ class Cell."); % Modify help description values as needed.
-%defineArgument(ProliferateDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%defineOutput(ProliferateDefinition, "RetVal", "clib.Model.Cell", <SHAPE>);
-%validate(ProliferateDefinition);
+ProliferateDefinition = addMethod(CellDefinition, ...
+   "Cell * Cell::Proliferate(Params * parameters)", ...
+   "Description", "clib.Model.Cell.Proliferate    Method of C++ class Cell."); % Modify help description values as needed.
+defineArgument(ProliferateDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+defineOutput(ProliferateDefinition, "RetVal", "clib.Model.Cell", 1);
+validate(ProliferateDefinition);
 
 %% C++ class public data member |currentState| for C++ class |Cell| 
 % C++ Signature: CellState Cell::currentState
@@ -317,29 +317,29 @@ PancreasDefinition = addClass(libDef, "Pancreas", "MATLABName", "clib.Model.Panc
 
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Pancreas * existing,Params * parameters)
-%PancreasConstructor1Definition = addConstructor(PancreasDefinition, ...
-%    "Pancreas::Pancreas(Pancreas * existing,Params * parameters)", ...
-%    "Description", "clib.Model.Pancreas.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
-%defineArgument(PancreasConstructor1Definition, "existing", "clib.Model.Pancreas", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
-%defineArgument(PancreasConstructor1Definition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%validate(PancreasConstructor1Definition);
+PancreasConstructor1Definition = addConstructor(PancreasDefinition, ...
+   "Pancreas::Pancreas(Pancreas * existing,Params * parameters)", ...
+   "Description", "clib.Model.Pancreas.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(PancreasConstructor1Definition, "existing", "clib.Model.Pancreas", "input", 1); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
+defineArgument(PancreasConstructor1Definition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+validate(PancreasConstructor1Definition);
 
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Params * parameters)
-%PancreasConstructor2Definition = addConstructor(PancreasDefinition, ...
-%    "Pancreas::Pancreas(Params * parameters)", ...
-%    "Description", "clib.Model.Pancreas.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
-%defineArgument(PancreasConstructor2Definition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%validate(PancreasConstructor2Definition);
+PancreasConstructor2Definition = addConstructor(PancreasDefinition, ...
+   "Pancreas::Pancreas(Params * parameters)", ...
+   "Description", "clib.Model.Pancreas.Pancreas    Constructor of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(PancreasConstructor2Definition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+validate(PancreasConstructor2Definition);
 
 %% C++ class method |CreateNewParticle| for C++ class |Pancreas| 
 % C++ Signature: Pancreas * Pancreas::CreateNewParticle(Params * parameters)
-%CreateNewParticleDefinition = addMethod(PancreasDefinition, ...
-%    "Pancreas * Pancreas::CreateNewParticle(Params * parameters)", ...
-%    "Description", "clib.Model.Pancreas.CreateNewParticle    Method of C++ class Pancreas."); % Modify help description values as needed.
-%defineArgument(CreateNewParticleDefinition, "parameters", "clib.Model.Params", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
-%defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", <SHAPE>);
-%validate(CreateNewParticleDefinition);
+CreateNewParticleDefinition = addMethod(PancreasDefinition, ...
+   "Pancreas * Pancreas::CreateNewParticle(Params * parameters)", ...
+   "Description", "clib.Model.Pancreas.CreateNewParticle    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(CreateNewParticleDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", 1);
+validate(CreateNewParticleDefinition);
 
 %% C++ class method |InjectPoint| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::InjectPoint(int x,int y,double amount)
@@ -363,11 +363,11 @@ validate(InjectFibreDefinition);
 
 %% C++ class method |LoadCellsCoordinates| for C++ class |Pancreas| 
 % C++ Signature: double * Pancreas::LoadCellsCoordinates()
-%LoadCellsCoordinatesDefinition = addMethod(PancreasDefinition, ...
-%    "double * Pancreas::LoadCellsCoordinates()", ...
-%    "Description", "clib.Model.Pancreas.LoadCellsCoordinates    Method of C++ class Pancreas."); % Modify help description values as needed.
-%defineOutput(LoadCellsCoordinatesDefinition, "RetVal", "double", <SHAPE>);
-%validate(LoadCellsCoordinatesDefinition);
+LoadCellsCoordinatesDefinition = addMethod(PancreasDefinition, ...
+   "double * Pancreas::LoadCellsCoordinates()", ...
+   "Description", "clib.Model.Pancreas.LoadCellsCoordinates    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(LoadCellsCoordinatesDefinition, "RetVal", "double", 1);
+validate(LoadCellsCoordinatesDefinition);
 
 %% C++ class method |DetermineNeighbours| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::DetermineNeighbours()
@@ -387,11 +387,11 @@ validate(HealthyCellsBeyondRadiusDefinition);
 
 %% C++ class method |AddNewCell| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::AddNewCell(Cell * new_cell)
-%AddNewCellDefinition = addMethod(PancreasDefinition, ...
-%    "void Pancreas::AddNewCell(Cell * new_cell)", ...
-%    "Description", "clib.Model.Pancreas.AddNewCell    Method of C++ class Pancreas."); % Modify help description values as needed.
-%defineArgument(AddNewCellDefinition, "new_cell", "clib.Model.Cell", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%validate(AddNewCellDefinition);
+AddNewCellDefinition = addMethod(PancreasDefinition, ...
+   "void Pancreas::AddNewCell(Cell * new_cell)", ...
+   "Description", "clib.Model.Pancreas.AddNewCell    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(AddNewCellDefinition, "new_cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+validate(AddNewCellDefinition);
 
 %% C++ class method |AddMoreTissue| for C++ class |Pancreas| 
 % C++ Signature: void Pancreas::AddMoreTissue(double moving_rim,double max_tumour_radius)
@@ -426,12 +426,12 @@ validate(TumourRadiusDefinition);
 
 %% C++ class method |DistanceToLine| for C++ class |Pancreas| 
 % C++ Signature: double Pancreas::DistanceToLine(Cell * cell)
-%DistanceToLineDefinition = addMethod(PancreasDefinition, ...
-%    "double Pancreas::DistanceToLine(Cell * cell)", ...
-%    "Description", "clib.Model.Pancreas.DistanceToLine    Method of C++ class Pancreas."); % Modify help description values as needed.
-%defineArgument(DistanceToLineDefinition, "cell", "clib.Model.Cell", "input", <SHAPE>); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
-%defineOutput(DistanceToLineDefinition, "RetVal", "double");
-%validate(DistanceToLineDefinition);
+DistanceToLineDefinition = addMethod(PancreasDefinition, ...
+   "double Pancreas::DistanceToLine(Cell * cell)", ...
+   "Description", "clib.Model.Pancreas.DistanceToLine    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(DistanceToLineDefinition, "cell", "clib.Model.Cell", "input", 1); % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
+defineOutput(DistanceToLineDefinition, "RetVal", "double");
+validate(DistanceToLineDefinition);
 
 %% C++ class method |TumourVolume| for C++ class |Pancreas| 
 % C++ Signature: double Pancreas::TumourVolume()
@@ -520,6 +520,14 @@ ReturnDrugConcentrationinFibreDefinition = addMethod(PancreasDefinition, ...
 defineOutput(ReturnDrugConcentrationinFibreDefinition, "RetVal", "double");
 validate(ReturnDrugConcentrationinFibreDefinition);
 
+%% C++ class method |ReturnDrugConcentrationAout| for C++ class |Pancreas| 
+% C++ Signature: double Pancreas::ReturnDrugConcentrationAout()
+ReturnDrugConcentrationAoutDefinition = addMethod(PancreasDefinition, ...
+    "double Pancreas::ReturnDrugConcentrationAout()", ...
+    "Description", "clib.Model.Pancreas.ReturnDrugConcentrationAout    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(ReturnDrugConcentrationAoutDefinition, "RetVal", "double");
+validate(ReturnDrugConcentrationAoutDefinition);
+
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Pancreas const & input1)
 PancreasConstructor3Definition = addConstructor(PancreasDefinition, ...
@@ -550,8 +558,8 @@ addProperty(PancreasDefinition, "drugConcentration", "clib.array.Model.Double", 
 
 %% C++ class public data member |fibreConcentration| for C++ class |Pancreas| 
 % C++ Signature: double * Pancreas::fibreConcentration
-%addProperty(PancreasDefinition, "fibreConcentration", "clib.array.Model.Double", <SHAPE>, ... % '<MLTYPE>' can be clib.array.Model.Double, or double
-%    "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
+addProperty(PancreasDefinition, "fibreConcentration", "clib.array.Model.Double", 1, ... % '<MLTYPE>' can be clib.array.Model.Double, or double
+   "Description", "clib.array.Model.Double    Data member of C++ class Pancreas."); % Modify help description values as needed.
 
 %% C++ function |SeedAndGrowToStartVolumeM| with MATLAB name |clib.Model.SeedAndGrowToStartVolumeM|
 % C++ Signature: Pancreas * SeedAndGrowToStartVolumeM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume)
@@ -571,38 +579,38 @@ validate(SeedAndGrowToStartVolumeMDefinition);
 
 %% C++ function |SimulateWholeExperimentM| with MATLAB name |clib.Model.SimulateWholeExperimentM|
 % C++ Signature: void SimulateWholeExperimentM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)
-%SimulateWholeExperimentMDefinition = addFunction(libDef, ...
-%    "void SimulateWholeExperimentM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)", ...
-%    "MATLABName", "clib.Model.SimulateWholeExperimentM", ...
-%    "Description", "clib.Model.SimulateWholeExperimentM    Representation of C++ function SimulateWholeExperimentM."); % Modify help description values as needed.
-%defineArgument(SimulateWholeExperimentMDefinition, "p0", "double");
-%defineArgument(SimulateWholeExperimentMDefinition, "psc", "double");
-%defineArgument(SimulateWholeExperimentMDefinition, "dmax", "int32");
-%defineArgument(SimulateWholeExperimentMDefinition, "gage", "int32");
-%defineArgument(SimulateWholeExperimentMDefinition, "page", "int32");
-%defineArgument(SimulateWholeExperimentMDefinition, "EC50", "double");
-%defineArgument(SimulateWholeExperimentMDefinition, "startVolume", "double");
-%defineArgument(SimulateWholeExperimentMDefinition, "timeSteps", "int32");
-%defineArgument(SimulateWholeExperimentMDefinition, "volumes", "clib.array.Model.Double", "input", <SHAPE>); % '<MLTYPE>' can be clib.array.Model.Double, or double
-%validate(SimulateWholeExperimentMDefinition);
+SimulateWholeExperimentMDefinition = addFunction(libDef, ...
+   "void SimulateWholeExperimentM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,double [] volumes)", ...
+   "MATLABName", "clib.Model.SimulateWholeExperimentM", ...
+   "Description", "clib.Model.SimulateWholeExperimentM    Representation of C++ function SimulateWholeExperimentM."); % Modify help description values as needed.
+defineArgument(SimulateWholeExperimentMDefinition, "p0", "double");
+defineArgument(SimulateWholeExperimentMDefinition, "psc", "double");
+defineArgument(SimulateWholeExperimentMDefinition, "dmax", "int32");
+defineArgument(SimulateWholeExperimentMDefinition, "gage", "int32");
+defineArgument(SimulateWholeExperimentMDefinition, "page", "int32");
+defineArgument(SimulateWholeExperimentMDefinition, "EC50", "double");
+defineArgument(SimulateWholeExperimentMDefinition, "startVolume", "double");
+defineArgument(SimulateWholeExperimentMDefinition, "timeSteps", "int32");
+defineArgument(SimulateWholeExperimentMDefinition, "volumes", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
+validate(SimulateWholeExperimentMDefinition);
 
 %% C++ function |PerformMultipleRunsM| with MATLAB name |clib.Model.PerformMultipleRunsM|
 % C++ Signature: void PerformMultipleRunsM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)
-%PerformMultipleRunsMDefinition = addFunction(libDef, ...
-%    "void PerformMultipleRunsM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
-%    "MATLABName", "clib.Model.PerformMultipleRunsM", ...
-%    "Description", "clib.Model.PerformMultipleRunsM    Representation of C++ function PerformMultipleRunsM."); % Modify help description values as needed.
-%defineArgument(PerformMultipleRunsMDefinition, "p0", "double");
-%defineArgument(PerformMultipleRunsMDefinition, "psc", "double");
-%defineArgument(PerformMultipleRunsMDefinition, "dmax", "int32");
-%defineArgument(PerformMultipleRunsMDefinition, "gage", "int32");
-%defineArgument(PerformMultipleRunsMDefinition, "page", "int32");
-%defineArgument(PerformMultipleRunsMDefinition, "EC50", "double");
-%defineArgument(PerformMultipleRunsMDefinition, "startVolume", "double");
-%defineArgument(PerformMultipleRunsMDefinition, "timeSteps", "int32");
-%defineArgument(PerformMultipleRunsMDefinition, "iterations", "int32");
-%defineArgument(PerformMultipleRunsMDefinition, "volumes", "clib.array.Model.Double", "input", <SHAPE>); % '<MLTYPE>' can be clib.array.Model.Double, or double
-%validate(PerformMultipleRunsMDefinition);
+PerformMultipleRunsMDefinition = addFunction(libDef, ...
+   "void PerformMultipleRunsM(double p0,double psc,int dmax,int gage,int page,double EC50,double startVolume,int timeSteps,int iterations,double [] volumes)", ...
+   "MATLABName", "clib.Model.PerformMultipleRunsM", ...
+   "Description", "clib.Model.PerformMultipleRunsM    Representation of C++ function PerformMultipleRunsM."); % Modify help description values as needed.
+defineArgument(PerformMultipleRunsMDefinition, "p0", "double");
+defineArgument(PerformMultipleRunsMDefinition, "psc", "double");
+defineArgument(PerformMultipleRunsMDefinition, "dmax", "int32");
+defineArgument(PerformMultipleRunsMDefinition, "gage", "int32");
+defineArgument(PerformMultipleRunsMDefinition, "page", "int32");
+defineArgument(PerformMultipleRunsMDefinition, "EC50", "double");
+defineArgument(PerformMultipleRunsMDefinition, "startVolume", "double");
+defineArgument(PerformMultipleRunsMDefinition, "timeSteps", "int32");
+defineArgument(PerformMultipleRunsMDefinition, "iterations", "int32");
+defineArgument(PerformMultipleRunsMDefinition, "volumes", "clib.array.Model.Double", "input", 1); % '<MLTYPE>' can be clib.array.Model.Double, or double
+validate(PerformMultipleRunsMDefinition);
 
 %% C++ function |CreateNewParticle| with MATLAB name |clib.Model.CreateNewParticle|
 % C++ Signature: Pancreas * CreateNewParticle(double p0,double psc,int dmax,int gage,int page,double EC50,Pancreas * pancreas)

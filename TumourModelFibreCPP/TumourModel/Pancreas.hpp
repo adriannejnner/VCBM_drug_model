@@ -533,4 +533,11 @@ public:
 		return drug_conc_fibre_total;
 		
 	}
+	
+	double ReturnDrugConcentrationAout()
+	{
+		double drug_conc_Aout = fibreConcentration[Params::N-1];
+		return drug_conc_Aout;
+		
+	}
 };

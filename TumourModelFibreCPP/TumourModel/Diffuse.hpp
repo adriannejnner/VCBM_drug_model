@@ -73,7 +73,7 @@ void odeFcn_main(double t, int G, double* y, double* dydt, int fibreX, int fibre
             dy(ii, jj) = diffuse4(y_mat(ii, jj), y_mat(ii+1, jj), y_mat(ii, jj+1), y_mat(ii-1, jj), y_mat(ii, jj-1));
 
     // evaluating fibre release
-    double d = Params::k / (t / 10 + 1) + Params::d_const; // release rate - NOTE depends on t explicitly
+    double d = Params::k / (t / 10 + 1 * 60) + Params::d_const * 60; // release rate - NOTE depends on t explicitly, need to change this so that t is plus the simulation hour
 	//double d = drug_release_rate(t);
     //printf("t = %f\n", t);
 
