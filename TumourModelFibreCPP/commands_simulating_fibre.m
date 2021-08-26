@@ -21,7 +21,7 @@ xinj1 = 0;
 yinj1 = 50;
 C0 = 526; 
 
-for jj = 1:250 % does 250 different simulations of tumour growth
+for jj = 1:4 % does 250 different simulations of tumour growth
     
     psim = clib.Model.CreateNewParticle(p0, psc, dmax, gage, page, EC50, p); %sets the initial tumour size for the simulation as the size of the tumour "p", i.e. tumour_volume_initial
     psim.InjectFibre(xinj1, yinj1, C0*2000/(10+1));% injects fibre at position xinj1 yinj1 of concentration C0
