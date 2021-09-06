@@ -9,6 +9,11 @@
 #include <assert.h>
 #include <chrono>
 
+
+#include <iostream>
+#include <random>
+
+
 using namespace::std;
 
 double totalTime = 0;
@@ -516,6 +521,14 @@ public:
 		return num_of_Healthy_cells;
 	}
 	
+	int TestingPoissonDist()
+	{
+		std::poisson_distribution<int> pd(parameters->gage);
+		
+		int newage = pd(gen);
+		return newage;
+	}
+	
 	double ReturnDrugConcentrationDomain()
 	{
 		double drug_conc_total = 0;
@@ -531,6 +544,13 @@ public:
 		for(int ii = 0; ii <Params::N; ii++)
 			drug_conc_fibre_total += fibreConcentration[ii];
 		return drug_conc_fibre_total;
+		
+	}
+	
+	double ReturnDrugConcentrationAout()
+	{
+		double drug_conc_Aout = fibreConcentration[Params::N-1];
+		return drug_conc_Aout;
 		
 	}
 };
