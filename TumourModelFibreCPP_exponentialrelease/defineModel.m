@@ -61,7 +61,7 @@ addProperty(CellStateDefinition, "spring_length", "double", ...
     "Description", "double    Data member of C++ class CellState."); % Modify help description values as needed.
 
 %% C++ class public data member |sibling| for C++ class |CellState| 
-% C++ Signature: Cell * CellState::sibling
+%C++ Signature: Cell * CellState::sibling
 addProperty(CellStateDefinition, "sibling", "clib.Model.Cell", 1, ... % '<MLTYPE>' can be clib.Model.Cell, or clib.array.Model.Cell
    "Description", "clib.Model.Cell    Data member of C++ class CellState."); % Modify help description values as needed.
 
