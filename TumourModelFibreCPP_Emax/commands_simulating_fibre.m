@@ -19,7 +19,7 @@ p = clib.Model.SeedAndGrowToStartVolumeM(p0, psc, dmax, gage, page, EC50, gamma,
 
 % initialise drug injection location and concentration
 xinj1 = 0;
-yinj1 = 50;
+yinj1 = 40;
 C0 = 526; 
 
 for jj = 1:4 % does 250 different simulations of tumour growth

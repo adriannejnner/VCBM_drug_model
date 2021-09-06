@@ -8,6 +8,12 @@
 #include <vector>
 #include <map>
 
+#include <iostream>
+#include <random>
+
+static std::random_device rd;
+static std::mt19937 gen(rd());
+
 using namespace::std;
 
 enum class CellType { Cancer = 1, Dead = 3, Healthy = 4, Empty = 5, PSC = 51 };
@@ -232,7 +238,7 @@ public:
 		newState.Y = currentState.Y + scale * sin(M_PI + theta);
 		newState.spring_length = Params::s / parameters->page;
 		
-		double age_prob = parameters->RandomDouble();
+		/*double age_prob = parameters->RandomDouble();
 		if(age_prob<0.1)
 		{newState.age = 1;}
 		else if(age_prob<0.2)
@@ -252,7 +258,10 @@ public:
 		else if(age_prob<0.9)
 		{newState.age = 9;}
 		else 
-		{newState.age = 10;}
+		{newState.age = 10;}*/	
+		std::poisson_distribution<int> pd(50);
+		
+		newState.age = pd(gen);
 			
 		return newState.sibling;
 	}
