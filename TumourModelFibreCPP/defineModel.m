@@ -504,6 +504,14 @@ ReturnTotalNumberHealthyCellsDefinition = addMethod(PancreasDefinition, ...
 defineOutput(ReturnTotalNumberHealthyCellsDefinition, "RetVal", "int32");
 validate(ReturnTotalNumberHealthyCellsDefinition);
 
+%% C++ class method |TestingPoissonDist| for C++ class |Pancreas| 
+% C++ Signature: int Pancreas::TestingPoissonDist()
+TestingPoissonDistDefinition = addMethod(PancreasDefinition, ...
+    "int Pancreas::TestingPoissonDist()", ...
+    "Description", "clib.Model.Pancreas.TestingPoissonDist    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineOutput(TestingPoissonDistDefinition, "RetVal", "int32");
+validate(TestingPoissonDistDefinition);
+
 %% C++ class method |ReturnDrugConcentrationDomain| for C++ class |Pancreas| 
 % C++ Signature: double Pancreas::ReturnDrugConcentrationDomain()
 ReturnDrugConcentrationDomainDefinition = addMethod(PancreasDefinition, ...

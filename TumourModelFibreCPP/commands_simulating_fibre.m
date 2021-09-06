@@ -5,7 +5,7 @@ addpath('Model','-end') % adds the path of the C++ code
 p0 = 0.2;
 psc = 1e-5;
 dmax = 20;
-gage = 170;
+gage = 270;
 page = 2;
 EC50 = 0.01;
 
@@ -14,17 +14,16 @@ p0 = 0.2;
 tumour_volume_initial = 201; %this is the size of the tumour we want to grow before we simulate treatment (or in this case no treatment)
 p = clib.Model.SeedAndGrowToStartVolumeM(p0, psc, dmax, gage, page, EC50, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
 
-
-
 % initialise drug injection location and concentration
 xinj1 = 0;
-yinj1 = 50;
-C0 = 526; 
+yinj1 = 0;
+C0 = 1000; 
 
-for jj = 1:4 % does 250 different simulations of tumour growth
-    
+for jj = 1:350 % does 250 different simulations of tumour growth
+   
+    p = clib.Model.SeedAndGrowToStartVolumeM(p0, psc, dmax, gage, page, EC50, tumour_volume_initial); % simulates the growth of a tumour starting at 1 cell and then stopping when the tumour volume reaches tumour_volume_initial
     psim = clib.Model.CreateNewParticle(p0, psc, dmax, gage, page, EC50, p); %sets the initial tumour size for the simulation as the size of the tumour "p", i.e. tumour_volume_initial
-    psim.InjectFibre(xinj1, yinj1, C0*2000/(10+1));% injects fibre at position xinj1 yinj1 of concentration C0
+   % psim.InjectFibre(xinj1, yinj1, C0*2000/(10+1));% injects fibre at position xinj1 yinj1 of concentration C0
     
     % initialising the vectors
 
@@ -51,6 +50,8 @@ for jj = 1:4 % does 250 different simulations of tumour growth
     NumberHealthycells_mat(jj,:) = NumberHealthycells;
     Totaldrugconc_mat(jj,:) = Totaldrugconc;
     TotalAout_mat(jj,:) = TotalAout;
+    
+save('Longinj.mat', 'Tvol_mat');
     jj
 end
 save('Longinj.mat', 'Tvol_mat');
@@ -76,7 +77,7 @@ xlabel('Time (days)')
 ylabel('Tumour volume (mm^3)')
 set(gca,'FontSize',18)
 ylabel('Cells')
-title('Tumour cells')
+title('Tumour Volume')
 
 % % plots the tumour volume of 10 simulations of the model for the same parameter values
 figure

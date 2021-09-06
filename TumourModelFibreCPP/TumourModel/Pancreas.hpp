@@ -9,6 +9,11 @@
 #include <assert.h>
 #include <chrono>
 
+
+#include <iostream>
+#include <random>
+
+
 using namespace::std;
 
 double totalTime = 0;
@@ -514,6 +519,14 @@ public:
 				num_of_Healthy_cells++;
 		
 		return num_of_Healthy_cells;
+	}
+	
+	int TestingPoissonDist()
+	{
+		std::poisson_distribution<int> pd(parameters->gage);
+		
+		int newage = pd(gen);
+		return newage;
 	}
 	
 	double ReturnDrugConcentrationDomain()
