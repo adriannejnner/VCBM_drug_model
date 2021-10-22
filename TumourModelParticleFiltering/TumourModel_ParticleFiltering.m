@@ -87,7 +87,7 @@ for t = 1:max_time-1
     for i = 1:n %for each particle
             
             %update particle's parameter values
-            particle{i} = clib.Model.CreateNewParticle(p00(i), pscc(i), dmaxx(i), gagee(i), page, particle{i}); %stores particles start tumour pointer
+            clib.Model.UpdateParticle(p00(i), pscc(i), dmaxx(i), gagee(i), page, particle{i});%clib.Model.CreateNewParticle(p00(i), pscc(i), dmaxx(i), gagee(i), page, particle{i}); %stores particles start tumour pointer
             
             %simulate particle tumour growth forward one day            
             PFTumourVolume(i) = particle{i}.SimulateOneDay(1); %simulates a day of tumour growth for each particle

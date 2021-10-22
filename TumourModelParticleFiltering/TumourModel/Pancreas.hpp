@@ -285,4 +285,8 @@ public:
 		}
 		return TumourVolume();
 	}
+	void UpdateParameters(Params* parameters)
+    {
+        this->parameters = parameters;
+    }
 };

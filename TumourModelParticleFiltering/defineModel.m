@@ -11,7 +11,7 @@
 function libDef = defineModel()
 libDef = clibgen.LibraryDefinition("ModelData.xml");
 %% OutputFolder and Libraries 
-libDef.OutputFolder = "C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\GitHub\VCBM_drug_model\TumourModelParticleFiltering";
+libDef.OutputFolder = "C:\Users\jenner2\OneDrive - Queensland University of Technology\Documents\2021\Polymer\VCBM_drug_model-main\VCBM_drug_model-main\TumourModelParticleFiltering";
 libDef.Libraries = "";
 
 %% C++ class |Params| with MATLAB name |clib.Model.Params| 
@@ -109,6 +109,14 @@ defineArgument(SimulateOneDayDefinition, "day", "int32");
 defineOutput(SimulateOneDayDefinition, "RetVal", "double");
 validate(SimulateOneDayDefinition);
 
+%% C++ class method |UpdateParameters| for C++ class |Pancreas| 
+% C++ Signature: void Pancreas::UpdateParameters(Params * parameters)
+UpdateParametersDefinition = addMethod(PancreasDefinition, ...
+   "void Pancreas::UpdateParameters(Params * parameters)", ...
+   "Description", "clib.Model.Pancreas.UpdateParameters    Method of C++ class Pancreas."); % Modify help description values as needed.
+defineArgument(UpdateParametersDefinition, "parameters", "clib.Model.Params", "input", 1); % '<MLTYPE>' can be clib.Model.Params, or clib.array.Model.Params
+validate(UpdateParametersDefinition);
+
 %% C++ class constructor for C++ class |Pancreas| 
 % C++ Signature: Pancreas::Pancreas(Pancreas const & input1)
 PancreasConstructor1Definition = addConstructor(PancreasDefinition, ...
@@ -146,6 +154,20 @@ defineArgument(CreateNewParticleDefinition, "page", "int32");
 defineArgument(CreateNewParticleDefinition, "pancreas", "clib.Model.Pancreas", "input", 1); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
 defineOutput(CreateNewParticleDefinition, "RetVal", "clib.Model.Pancreas", 1);
 validate(CreateNewParticleDefinition);
+
+%% C++ function |UpdateParticle| with MATLAB name |clib.Model.UpdateParticle|
+% C++ Signature: void UpdateParticle(double p0,double psc,int dmax,int gage,int page,Pancreas * pancreas)
+UpdateParticleDefinition = addFunction(libDef, ...
+   "void UpdateParticle(double p0,double psc,int dmax,int gage,int page,Pancreas * pancreas)", ...
+   "MATLABName", "clib.Model.UpdateParticle", ...
+   "Description", "clib.Model.UpdateParticle    Representation of C++ function UpdateParticle."); % Modify help description values as needed.
+defineArgument(UpdateParticleDefinition, "p0", "double");
+defineArgument(UpdateParticleDefinition, "psc", "double");
+defineArgument(UpdateParticleDefinition, "dmax", "int32");
+defineArgument(UpdateParticleDefinition, "gage", "int32");
+defineArgument(UpdateParticleDefinition, "page", "int32");
+defineArgument(UpdateParticleDefinition, "pancreas", "clib.Model.Pancreas", "input", 1); % '<MLTYPE>' can be clib.Model.Pancreas, or clib.array.Model.Pancreas
+validate(UpdateParticleDefinition);
 
 %% Validate the library definition
 validate(libDef);

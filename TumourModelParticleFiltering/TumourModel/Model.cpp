@@ -22,3 +22,8 @@ Pancreas* CreateNewParticle(double p0, double psc, int dmax, int gage, int page,
 {
 	return pancreas->CreateNewParticle(new Params(p0, psc, dmax, gage, page));
 }
+
+void UpdateParticle(double p0, double psc, int dmax, int gage, int page, Pancreas* pancreas)
+{
+    pancreas->UpdateParameters(new Params(p0, psc, dmax, gage, page));
+}
